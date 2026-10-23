@@ -1,20 +1,23 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Patriot Design Coach</title><style>body{background:#f6f0e3;color:#172b43;font:18px Georgia,serif;max-width:750px;margin:12vh auto;padding:24px}a{color:#792f3b}</style></head><body><h1>Opening the Patriot Design Coach…</h1><p id="status">Loading official section templates.</p><p><a href="./Patriot_Design_Coach_V2_4_Single_File.html">Open the original version</a></p><script>
-(async function(){
-try {
- const resp=await fetch('./Patriot_Design_Coach_V2_4_Single_File.html',{cache:'no-store'});
- if(!resp.ok)throw new Error('Design Coach file unavailable ('+resp.status+')');
- let html=await resp.text();
- const regex=/(<script id="embeddedData" type="application\/json">)([\s\S]*?)(<\/script>)/;
- const match=html.match(regex);
- if(!match)throw new Error('Template information not found.');
- const data=JSON.parse(match[2]);
- const names={"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]};
- for(const [section,labels] of Object.entries(names)){
-   if(!data.images || !Array.isArray(data.images[section]) || data.images[section].length!==5) throw new Error('Missing guide images for '+section);
-   data.names[section]=labels;
- }
- html=html.replace(regex,function(){return match[1]+JSON.stringify(data).replace(/</g,'\\u003c')+match[3]});
- document.open(); document.write(html); document.close();
-} catch(err){document.getElementById('status').textContent='Could not open the updated Coach: '+err.message;}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Patriot Field Guide — Design Coach</title><style>body{font:18px Georgia,serif;background:#f6f0e3;color:#172b43;margin:10vh auto;max-width:720px;padding:24px}a{color:#792f3b}</style></head><body><h1>Opening The Patriot Design Coach…</h1><p id="status">Loading the official template gallery and current corrections.</p><script>
+(async()=>{
+ try{
+   const response=await fetch('./coach-core.html?v=20261023b',{cache:'no-store'});
+   if(!response.ok)throw Error('Core app unavailable: '+response.status);
+   let html=await response.text();
+   const start='<script id="embeddedData" type="application/json">';
+   const a=html.indexOf(start);
+   const b=a<0?-1:html.indexOf('</scr'+'ipt>',a+start.length);
+   if(a<0||b<0)throw Error('Template data could not be located');
+   const original=html.slice(a+start.length,b);
+   const data=JSON.parse(original);
+   const names={"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]};
+   for(const [key,labels] of Object.entries(names)){
+      if(!Array.isArray(data.images[key])||data.images[key].length!==5)throw Error('Missing five guide images for '+key);
+      data.names[key]=labels;
+   }
+   const json=JSON.stringify(data).replace(/</g,'\\u003c');
+   html=html.slice(0,a+start.length)+json+html.slice(b);
+   document.open();document.write(html);document.close();
+ }catch(err){document.getElementById('status').textContent='Unable to open updated Coach: '+err.message;}
 })();
 </script></body></html>
