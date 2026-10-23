@@ -18,6 +18,7 @@
    const json=JSON.stringify(data).replace(/</g,'\\u003c');
    html=html.slice(0,a+start.length)+json+html.slice(b);
    html=html.replace('</body>','<a href="./ai-review.html" style="position:fixed;right:16px;bottom:16px;z-index:9999;background:#792f3b;color:#fff;padding:14px 18px;border-radius:5px;font:700 15px Arial,sans-serif;text-decoration:none;box-shadow:0 3px 18px #172b4355">AI Spread Review ↗</a></body>');
+   html=html.replace('</body>','<a href="./inspection.html" style="position:fixed;left:16px;bottom:16px;z-index:9999;background:#172c43;color:white;padding:14px 18px;border-radius:5px;font:700 15px Arial,sans-serif;text-decoration:none;box-shadow:0 3px 18px #172c4355">Spread Inspection Studio ↗</a></body>');
    document.open();document.write(html);document.close();
  }catch(err){document.getElementById('status').textContent='Unable to open updated Coach: '+err.message;}
 })();
