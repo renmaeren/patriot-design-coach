@@ -1,24 +1,48 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Patriot Field Guide — Design Coach</title><style>body{font:18px Georgia,serif;background:#f6f0e3;color:#172b43;margin:10vh auto;max-width:720px;padding:24px}a{color:#792f3b}</style></head><body><h1>Opening The Patriot Design Coach…</h1><p id="status">Loading the official template gallery and current corrections.</p><script>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Patriot | Design Coach</title>
+<style>
+:root{--paper:#f6f0e3;--navy:#172b43;--red:#792f3b;--edge:#cbbb9f}*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--navy);font:17px Georgia,serif}
+header{background:var(--navy);color:white;padding:27px max(22px,calc((100vw - 1050px)/2));border-bottom:7px solid var(--red)}
+header small{letter-spacing:.19em;color:#e5d0ad;font:700 12px Arial,sans-serif}header h1{font-size:clamp(29px,4vw,48px);margin:10px 0}header p{margin:0;line-height:1.5}
+main{max-width:1050px;margin:34px auto;padding:0 20px}h2{font-size:28px}p{line-height:1.6}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:25px}
+.choice{display:block;background:#fffdf8;border:2px solid var(--edge);padding:28px;color:var(--navy);text-decoration:none;border-top:7px solid var(--red);min-height:235px;box-shadow:0 5px 20px #172b4312}.choice:hover,.choice:focus{border-color:var(--red);outline:3px solid #b9a6a0}
+.choice strong{display:block;font-size:27px;margin:15px 0 10px}.choice span{font:16px/1.6 Arial,sans-serif;color:#42546d}
+.mini{margin-top:26px;background:#eee5d6;padding:16px 19px;border-left:4px solid var(--red);font:14px/1.6 Arial,sans-serif}
+@media(max-width:650px){.choices{grid-template-columns:1fr}.choice{min-height:0}}
+</style></head><body>
+<header><small>THE PATRIOT · ALLEN COUNTY–SCOTTSVILLE HIGH SCHOOL</small><h1>The Patriot Design Coach</h1><p>2026–2027 · Field Guide Edition</p></header>
+<main><h2>What are you working on today?</h2><p>Choose the path that fits your job. Both are part of the same Design Coach.</p>
+<div class="choices">
+<a class="choice" href="?view=learn"><span aria-hidden="true">◈ &nbsp; TEMPLATE FIELD GUIDE</span><strong>I'm Starting a Spread</strong><span>See approved layouts, learn the Field Guide look, and plan your Memento pages before you build them.</span><p><b>Open templates →</b></p></a>
+<a class="choice" href="?view=review"><span aria-hidden="true">✓ &nbsp; REVISION WORKSHOP</span><strong>I'm Reviewing a Spread</strong><span>Work through four focused Gemini checks, revise in Memento, and generate your Production Revision Report.</span><p><b>Begin review →</b></p></a>
+</div><div class="mini"><b>Returning to a spread?</b> Choose <b>I'm Reviewing a Spread</b>, select your section/template and review round, and continue in your existing school Gemini conversation. The Coach does not require a separate student login.</div></main>
+<script>
 (async()=>{
- try{
-   const response=await fetch('./coach-core.html?v=20261023b',{cache:'no-store'});
-   if(!response.ok)throw Error('Core app unavailable: '+response.status);
-   let html=await response.text();
-   const start='<script id="embeddedData" type="application/json">';
-   const a=html.indexOf(start);
-   const b=a<0?-1:html.indexOf('</scr'+'ipt>',a+start.length);
-   if(a<0||b<0)throw Error('Template data could not be located');
-   const original=html.slice(a+start.length,b);
-   const data=JSON.parse(original);
-   const names={"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]};
-   for(const [key,labels] of Object.entries(names)){
-      if(!Array.isArray(data.images[key])||data.images[key].length!==5)throw Error('Missing five guide images for '+key);
-      data.names[key]=labels;
-   }
-   const json=JSON.stringify(data).replace(/</g,'\\u003c');
-   html=html.slice(0,a+start.length)+json+html.slice(b);
-   html=html.replace('</body>','<a href="./ai-review.html" style="position:fixed;right:16px;bottom:16px;z-index:9999;background:#793443;color:#fff;padding:16px 20px;border-radius:6px;font:700 16px Arial,sans-serif;text-decoration:none;box-shadow:0 4px 20px #172b4366">Review My Spread with Gemini ↗</a></body>');
-   document.open();document.write(html);document.close();
- }catch(err){document.getElementById('status').textContent='Unable to open updated Coach: '+err.message;}
+const mode=new URLSearchParams(location.search).get('view');
+if(!['learn','review'].includes(mode))return;
+const page=mode==='learn'?'coach-core.html':'ai-review.html';
+const main=document.querySelector('main');
+main.innerHTML='<h2>Opening '+(mode==='learn'?'template field guide':'revision workshop')+'…</h2>';
+try{
+const response=await fetch('./'+page+'?v=20261026c',{cache:'no-store'});
+if(!response.ok)throw Error('Unable to load '+page+': '+response.status);
+let html=await response.text();
+if(mode==='learn'){
+const start='<script id="embeddedData" type="application/json">';
+const a=html.indexOf(start),b=a<0?-1:html.indexOf('</scr'+'ipt>',a+start.length);
+if(a<0||b<0)throw Error('Approved template data missing');
+const data=JSON.parse(html.slice(a+start.length,b));
+const names={"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]};
+for(const [key,labels] of Object.entries(names)){if(!Array.isArray(data.images[key])||data.images[key].length!==5)throw Error('Missing template images for '+key);data.names[key]=labels}
+const json=JSON.stringify(data).replace(/</g,'\\u003c');html=html.slice(0,a+start.length)+json+html.slice(b);
+html=html.replace('</body>','<nav style="position:fixed;bottom:14px;right:14px;z-index:9999;display:flex;gap:8px;flex-wrap:wrap"><a href="./" style="background:#172b43;color:white;padding:13px;border-radius:5px;font:bold 14px Arial;text-decoration:none">⌂ Home</a><a href="?view=review" style="background:#792f3b;color:white;padding:13px;border-radius:5px;font:bold 14px Arial;text-decoration:none">Review a Spread →</a></nav></body>');
+}else{
+html=html.replace('<a href="./">← Back to Design Coach</a>','<a href="./">← Coach Home</a> &nbsp; <a href="?view=learn">Approved Templates →</a>');
+}
+document.open();document.write(html);document.close();
+}catch(e){document.body.innerHTML='<main><h1>Could not open the Design Coach</h1><p>'+String(e.message).replace(/[<>]/g,'')+'</p><a href="./">Return to the home page</a></main>'}
 })();
 </script></body></html>
