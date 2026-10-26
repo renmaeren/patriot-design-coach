@@ -31,6 +31,9 @@ function capture(){
 }
 function read(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch{return {}}}
 function write(o){localStorage.setItem(KEY,JSON.stringify(o))}
+const DRAFT="patriot-wizard-draft-v1";
+let accumulated={};try{accumulated=JSON.parse(sessionStorage.getItem(DRAFT)||"{}")}catch{}
+function remember(){for(const a of capture())accumulated[a.question]=a.answer;try{sessionStorage.setItem(DRAFT,JSON.stringify(accumulated))}catch{}}
 function init(){
  if(document.getElementById("patriot-planning-dock"))return;
  const root=document.createElement("aside");root.id="patriot-planning-dock";
@@ -40,14 +43,18 @@ function init(){
  toggle.onclick=()=>{body.hidden=!body.hidden;toggle.textContent=body.hidden?"Show":"Hide"};
  button.onclick=()=>{
   const spread=clean(title.value);if(!spread){status.textContent="Enter a title so your plan can be matched to your spread.";title.focus();return}
-  const answers=capture();if(!answers.length){status.textContent="No planning answers detected yet. Fill in the wizard first.";return}
+  remember();const answers=Object.entries(accumulated).map(([question,answer])=>({question,answer}));if(!answers.length){status.textContent="No planning answers detected yet. Fill in the wizard first.";return}
   const id=slug(spread),plans=read(),stamp=new Date().toISOString();
   const prior=plans[id];
   plans[id]={id,title:spread,answers,createdAt:prior?.createdAt||stamp,updatedAt:stamp};
   try{write(plans)}catch(e){status.textContent="Unable to save in this browser. Storage may be blocked.";return}
   window.location.href="./?view=review&plan="+encodeURIComponent(id);
  };
- // Keep the dock available even on multi-step wizard screens.
+ document.addEventListener("input",e=>{if(!e.target.closest("#patriot-planning-dock"))remember()},true);
+ document.addEventListener("change",e=>{if(!e.target.closest("#patriot-planning-dock"))remember()},true);
+ document.addEventListener("click",e=>{if(!e.target.closest("#patriot-planning-dock"))remember()},true);
+ remember();
+ // Preserve answers between wizard steps, even if the wizard removes a previous step from the page.
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();
