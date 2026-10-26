@@ -106,12 +106,24 @@ const close=()=>{overlay.hidden=true;previousFocus?.focus?.()};
 function render(){
  const p=pages[step];el("guide-progress").textContent="STEP "+(step+1)+" OF "+pages.length;
  el("guide-title").textContent=p.title;el("guide-body").textContent=p.body;
+ el("guide-extra").replaceChildren();
+ if(step===0){
+  const secLabel=document.createElement("label");secLabel.textContent="Yearbook section";const sec=document.createElement("select");
+  const tmpLabel=document.createElement("label");tmpLabel.textContent="Assigned template";const tmp=document.createElement("select");
+  function syncTemplates(){const main=el("template");tmp.replaceChildren(...Array.from(main.options).map(x=>new Option(x.textContent,x.value)));tmp.value=main.value}
+  sec.replaceChildren(...Array.from(el("section").options).map(x=>new Option(x.textContent,x.value)));sec.value=el("section").value;
+  sec.addEventListener("change",()=>{el("section").value=sec.value;el("section").dispatchEvent(new Event("change"));syncTemplates()});
+  tmp.addEventListener("change",()=>{el("template").value=tmp.value;el("template").dispatchEvent(new Event("change"))});
+  syncTemplates();el("guide-extra").append(secLabel,sec,tmpLabel,tmp);
+ }
+ if(step===1){const name=el("upload").files[0]?.name; if(name){const p=document.createElement("p");p.textContent="Selected file: "+name;el("guide-extra").append(p)}}
  el("guide-back").disabled=step===0;el("guide-next").textContent=step===pages.length-1?"Finish ✓":"Next →";
  el("guide-action").textContent=p.action;el("guide-message").textContent="";
  if(step===1&&!el("upload").files.length)el("guide-message").textContent="Choose a spread before moving to the next step.";
  if(step===2&&el("reference-download").hidden)el("guide-message").textContent="Wait until the official template finishes loading.";
 }
 el("start-guide").addEventListener("click",open);
+el("upload").addEventListener("change",()=>{if(!overlay.hidden&&step===1)render()});
 el("guide-close").addEventListener("click",close);
 overlay.addEventListener("click",e=>{if(e.target===overlay)close()});
 document.addEventListener("keydown",e=>{if(overlay.hidden)return;if(e.key==="Escape")close()});
@@ -125,8 +137,8 @@ el("guide-next").addEventListener("click",()=>{
  step++;render();
 });
 el("guide-action").addEventListener("click",async()=>{
- if(step===0){close();el("section").scrollIntoView({behavior:"smooth",block:"center"});el("section").focus();return}
- if(step===1){close();el("upload").scrollIntoView({behavior:"smooth",block:"center"});el("upload").click();return}
+ if(step===0){el("guide-message").textContent="Template selected. Click Next to continue.";return}
+ if(step===1){el("upload").click();return}
  if(step===2){if(el("reference-download").hidden){el("guide-message").textContent="The official template has not loaded yet.";return}el("reference-download").click();savedReference=true;el("guide-message").textContent="Saved reference requested. Check your Downloads folder.";return}
  if(step===3){try{await navigator.clipboard.writeText(el("prompt").value);copied=true;el("guide-message").textContent="Instructions copied! Paste them into Gemini."}catch{el("guide-message").textContent="Clipboard unavailable. Close this guide and use Copy Review Instructions or Ctrl+C.";return}return}
  if(step===4){window.open("https://gemini.google.com/app","_blank","noopener,noreferrer");visitedGemini=true;el("guide-message").textContent="Gemini opened in a new tab. Paste the instructions and attach BOTH files before sending.";return}
