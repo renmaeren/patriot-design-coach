@@ -176,7 +176,7 @@ STUDENT-REPORTED REVIEW ROUND: ${round} (NOT automatically verified).
 TOPIC: ${$("topic").value||"Not specified"}
 PAGES: ${$("page-number").value||"Not specified"}
 
-Use our EXISTING Gemini conversation with the prior review and rechecks, and the ORIGINAL spread, LATEST revised spread, and OFFICIAL TEMPLATE. If any are missing, explicitly request them before evaluating. Do NOT invent a first version, a revision history, errors fixed, or exact review counts. List evidence and uncertainty.
+ORIGINAL STUDENT PLAN VS FINAL SPREAD:\n${window.patriotPlanning?.forGemini?.()||"No planning record supplied."}\n\nUse our EXISTING Gemini conversation with the prior review and rechecks, and the ORIGINAL spread, LATEST revised spread, and OFFICIAL TEMPLATE. If any are missing, explicitly request them before evaluating. Do NOT invent a first version, a revision history, errors fixed, or exact review counts. List evidence and uncertainty.
 
 Generate a report suitable for pasting into Google Docs and submitting in Google Classroom, with the following headings:
 1. SPREAD INFORMATION — template, subject, page numbers, self-reported review round; label the round as self-reported.
@@ -185,7 +185,7 @@ Generate a report suitable for pasting into Google Docs and submitting in Google
 4. FINAL OVERALL REVIEW — compare ORIGINAL and FINAL files directly, noting meaningful improvement, regressions, remaining MUST DO issues, NEED TO DO NEXT items, and OPTIONAL POLISH ideas.
 5. HUMAN FACT-CHECK & APPROVAL ITEMS — names, quotes, dates, roster, captions, statistics, image permissions, sponsor/coach and any illegible wording.
 6. ADVISOR SUMMARY — concise: where the spread started; what improved; what is still unresolved; evidence missing; ready for HUMAN review or needs further student work (NOT automatically approved).
-7. STUDENT CLASSROOM SUBMISSION REMINDER — submit final exported Memento spread and this report (with original-versus-final evidence if required).
+7. PLANNED VS COMPLETED — evaluate each student-entered planning goal against the final spread; label OBSERVED, PLANNED BUT MISSING, CHANGED FROM PLAN, or CANNOT VERIFY. Do not claim visual proof for names, interview accuracy or unseen work.\n8. STUDENT CLASSROOM SUBMISSION REMINDER — submit final exported Memento spread and this report (with original-versus-final evidence if required).
 
 Use explicit evidence, not guesses. Distinguish a student's claims from Gemini-rechecked visible corrections. Do not certify completion, invent a verified count of visits, or declare the spread approved. If prior feedback is unavailable say "History not provided" rather than creating it.`;
 try{await navigator.clipboard.writeText(prompt);$("report-status").textContent="Production report instructions copied. Open your ORIGINAL Gemini conversation, paste, and attach original and revised spreads plus template if necessary."}
@@ -294,7 +294,7 @@ Say “No clearly visible findings” when a group has none. Do not invent issue
 4. HUMAN CHECKS: list unreadable or unverified names, facts, quotes, captions and approvals.
 5. END WITH “REVISE THIS WAVE IN MEMENTO, EXPORT THE UPDATE, THEN ASK ME TO RECHECK THE SAME WAVE.” Do not mark boxes complete or pretend you have edited the file.
 
-Focus on THIS wave, not all four at once. Be specific, clear, and student-friendly.`;
+PLANNING CROSS-CHECK:\n${window.patriotPlanning?.forGemini?.()||"No planning record supplied."}\n\nFocus on THIS wave, not all four at once. Be specific, clear, and student-friendly.`;
 }
 function recheckPrompt(i){
 const d=context(),w=waves[i];
@@ -375,7 +375,7 @@ async function geminiPDF(){
   if(savedPlan&&savedPlan.answers?.length){
     const width=612,height=792,margin=42;let page=pdf.addPage([width,height]),y=height-margin;
     const newline=(s,size=10,weight=false)=>{
-      const t=ascii(s),maxWidth=width-2*margin,words=t.split(/\\s+/);let line="";
+      const t=ascii(s),maxWidth=width-2*margin,words=t.split(/\s+/);let line="";
       for(const word of words){const candidate=line?line+" "+word:word;if(font.widthOfTextAtSize(candidate,size)>maxWidth&&line){draw(line,size,weight);line=word}else line=candidate}
       if(line)draw(line,size,weight);
     };
@@ -421,4 +421,4 @@ window.patriotNames={
 };
 render();
 })();
-</script></body></html>
+</script><script src="./review-plan-bridge.js" defer></script></body></html>
