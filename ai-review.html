@@ -23,7 +23,20 @@
 </ol>
 <div class="note"><strong>Priority key:</strong> <b>MUST DO</b> = incorrect template use, missing required elements, illegible text, or other problems blocking approval. <b>NEED TO DO NEXT</b> = important quality improvements. <b>OPTIONAL POLISH</b> = small, nonessential Field Guide enhancements. An item can appear in any of the three review waves.</div>
 <p class="sub">Keep Gemini's response as your revision checklist; you do not have to retype every finding into the manual Spread Inspection Studio.</p>
-<button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section></main>
+<button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section><section class="card" id="recheck-revisions" style="border-top:5px solid #792f3b"><h2>05 · Recheck My Revised Spread</h2>
+<p><strong>Already received Gemini feedback and made corrections in Memento?</strong> Come back here to start a second review. You do not need to redo the whole guided setup.</p>
+<ol style="line-height:1.7;padding-left:25px">
+<li>Export or screenshot your <strong>revised</strong> spread from Memento. Keep your original Gemini conversation open or find it in your Gemini history.</li>
+<li>Click <strong>Copy Recheck Instructions</strong> below.</li>
+<li>Click <strong>Return to Gemini</strong> and open the <em>same conversation</em> that contains the first review. A new conversation will not automatically remember the previous feedback.</li>
+<li>Paste the recheck instructions, and attach your <strong>revised spread</strong> and the <strong>same official template</strong>. If you use a new conversation, also attach or paste your first feedback report.</li>
+<li>Review which findings Gemini marks <strong>RESOLVED</strong>, <strong>STILL NEEDS WORK</strong>, or <strong>CANNOT VERIFY</strong>. Correct remaining MUST DO items in Memento, then repeat if necessary.</li>
+<li>Submit the revised spread through your editor's normal review process. <strong>Only a human reviewer can approve it.</strong></li>
+</ol>
+<div class="note"><strong>What gets checked?</strong> Gemini compares the revised spread against the assigned template and the previous review. It should revisit every original correction and identify newly visible problems, not just give three more suggestions.</div>
+<button class="btn" id="copy-recheck-return" type="button">1 · Copy Recheck Instructions</button><a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Return to School Gemini ↗</a>
+<p class="status" id="return-status" role="status"></p>
+</section></main>
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
@@ -117,6 +130,11 @@ async function load(){
  $("reference-status").textContent="Official template gallery loaded.";refreshTemplate();
  }catch(e){$("reference-status").textContent="Could not load official template references: "+e.message;refreshTemplate();}
 }
+document.getElementById("copy-recheck-return").addEventListener("click",async()=>{
+ const prompt="I have revised my yearbook spread in Memento. I have attached the REVISED spread and the SAME official template. Use your previous review from this conversation. Recheck ALL original findings, across Wave 1 Layout, Wave 2 Design, and Wave 3 Text/Grammar. For EACH earlier finding report RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY, with precise visual evidence and the next concrete fix. Organize unresolved and newly noticed findings within each wave by MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Do not limit findings to three. Do not invent unreadable names or text. End with a concise list of remaining MUST DO changes and human verification requirements. Do not claim you edited or approved my spread.";
+ try{await navigator.clipboard.writeText(prompt);document.getElementById("return-status").textContent="Recheck instructions copied. Open your existing Gemini conversation and attach the revised spread and official template."}
+ catch{document.getElementById("return-status").textContent="Clipboard permission blocked. Use the Copy Follow-Up Recheck Instructions control in Step 4 or copy the prompt manually."}
+});
 updateOptions();load();
 })();
 </script><div id="guide-overlay" hidden><section id="guide-panel" role="dialog" aria-modal="true" aria-labelledby="guide-title">
