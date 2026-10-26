@@ -11,7 +11,19 @@
 <section class="card"><h2>01 · Identify the assigned template</h2><div class="grid"><div><label for="section">Yearbook section</label><select id="section"></select></div><div><label for="template">Approved template</label><select id="template"></select></div></div><p id="target" class="sub">Loading approved template references…</p><p id="reference-status" class="status"></p></section>
 <section class="card"><h2>02 · Compare your spread</h2><div class="grid"><div><h3>Your uploaded spread</h3><label for="upload">PNG / JPG / PDF (local preview)</label><input id="upload" type="file" accept="image/png,image/jpeg,image/webp,application/pdf"><div class="preview" id="student-preview"><div class="empty">Choose a screenshot or PDF to view it here.</div></div><p id="file-status" class="sub">No file selected. The website does not upload or save your spread.</p></div><div><h3>Official template reference</h3><div class="preview" id="official-preview"><div class="empty">Loading the approved template…</div></div><p class="sub">Compare the required placement of photos, story, captions, labels, and informational graphics. A–C are single pages; D–E are doubles.</p><a id="reference-download" class="btn ghost" download="approved-template.png" href="#" hidden>Save Official Template for Gemini</a></div></div></section>
 <section class="card"><h2>03 · Review your spread with school Gemini</h2><p class="note"><strong>Three steps:</strong> Copy the prepared critique instructions below, open Gemini in a new tab, then attach <strong>both files</strong>: (1) your Memento spread and (2) the official template from Step 2. Google Gemini cannot automatically see files you uploaded to this Design Coach.</p><div class="grid"><div><label for="topic">Spread topic</label><input id="topic" placeholder="e.g., Pep Club / Senior Picnic / Ag Mechanics"></div><div><label for="page-number">Page number(s), optional</label><input id="page-number" placeholder="e.g., 42–43"></div></div><p class="sub">These instructions update automatically for your selected template. Check that both the student spread and the official template are attached in Gemini before submitting the request. Gemini cannot verify unseen or illegible details.</p><label for="prompt">Prepared instructions for Gemini</label><textarea id="prompt" readonly></textarea><button class="btn" id="copy">1 · Copy Review Instructions</button><a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Open School Gemini ↗</a><p id="copy-status" class="status" role="status"></p><div class="note"><strong>In Gemini:</strong> Paste the copied instructions, use the attachment/paperclip control to upload your spread and the saved official reference image, then send. Gemini should report every visible issue in three waves (Layout, Design, Text/Grammar), ranked MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Fix required issues before polishing. Never treat Gemini feedback as advisor approval.</div></section>
-<section class="card"><h2>04 · Keep a complete three-wave revision log</h2><p>Instead of limiting feedback to three changes, record <strong>every finding</strong> in the Spread Inspection Studio. Work in three waves: Layout, Design, and Text/Grammar. For each wave, prioritize the feedback as MUST DO, NEED TO DO NEXT, or OPTIONAL POLISH; then mark each fix complete.</p><a class="btn" href="./inspection.html">Open the full Spread Inspection Studio ↗</a><p class="sub">Download the complete revision plan from that studio after you record your findings. Human review and approval are still required.</p></section></main>
+<section class="card"><h2>04 · Use Gemini's feedback to revise your spread</h2><p><strong>Do not stop when Gemini answers.</strong> The goal is to make corrections in Memento, not just receive a review.</p>
+<ol style="line-height:1.65;padding-left:25px">
+<li><strong>Read the entire Gemini response.</strong> It should give you THREE waves: <b>1. Layout, 2. Design, 3. Text/Grammar.</b> If a wave is missing, ask Gemini: <em>“Please finish the missing review wave and list every issue you can actually see.”</em></li>
+<li><strong>Start with Wave 1 — Layout.</strong> Find the section labeled <b>MUST DO</b>. Open your spread in Memento and fix those problems first. Then work through <b>NEED TO DO NEXT</b>. Only consider <b>OPTIONAL POLISH</b> after the required work.</li>
+<li><strong>Continue with Wave 2 — Design</strong> in the same order: MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Make the changes in Memento—not just in the Gemini conversation.</li>
+<li><strong>Finish with Wave 3 — Text/Grammar.</strong> Correct readable errors. Independently verify names, quotes, dates, statistics, captions, rosters, and any text Gemini could not clearly read.</li>
+<li><strong>Mark corrections in Gemini's checklist.</strong> Copy Gemini's response into a Google Doc or your assignment submission, then change each unchecked box <code>[ ]</code> to <code>[x]</code> only <em>after</em> you have made that correction in Memento. Do not mark unchecked items complete merely to finish.</li>
+<li><strong>Recheck the finished spread.</strong> Export the revised page(s), attach them in the SAME Gemini conversation with the official template, and ask: <em>“Recheck my revised spread against your previous findings. Which MUST DO and NEED TO DO NEXT issues remain? List any new problems you can see.”</em></li>
+<li><strong>Submit for human review.</strong> Follow your editor's required review and approval process. Gemini does not approve pages, verify reporting, or replace an adult reviewer.</li>
+</ol>
+<div class="note"><strong>Priority key:</strong> <b>MUST DO</b> = incorrect template use, missing required elements, illegible text, or other problems blocking approval. <b>NEED TO DO NEXT</b> = important quality improvements. <b>OPTIONAL POLISH</b> = small, nonessential Field Guide enhancements. An item can appear in any of the three review waves.</div>
+<p class="sub">Keep Gemini's response as your revision checklist; you do not have to retype every finding into the manual Spread Inspection Studio.</p>
+<button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section></main>
 <script>
 (()=>{
 const $=id=>document.getElementById(id);
@@ -46,13 +58,34 @@ REVIEW CRITERIA:
 6. FIELD GUIDE FINISH: restrained archival paper, observation labels, subtle paper clips, annotated notes, small stamps, useful ephemera; maintain navy/burgundy/cream visual discipline. Do not add decorations merely to fill space.
 7. ACCURACY/APPROVAL: call out facts that need verification; do not claim factual correctness from appearance.
 
-OUTPUT FORMAT:
-A) Template match: Matches / Partially matches / Major differences / Cannot assess; include evidence.
-B) Three things already working (only where visibly supported).
-C) Give ALL visible actionable corrections, without a fixed limit. Organize them into three WAVES: 1. LAYOUT (template match, gutter, margins, elements); 2. DESIGN (photos, hierarchy, captions, graphics, Field Guide finishing); 3. TEXT / GRAMMAR (headlines, clarity, copyfit, spelling, punctuation, reporting checks). Within EACH wave, group findings by priority: MUST DO (approval-blocking problems), NEED TO DO NEXT (important improvements), OPTIONAL POLISH (nonessential finishing touches). For EVERY finding, identify the exact part of the spread, explain the problem, and state a practical fix within the SAME approved template. Never limit the number of findings to three.
-D) Replace-the-clip-art proposal: 2 meaningful graphic options that could fit the existing informational-graphic area, stating which real data the student must collect.
-E) Field Guide polish: up to 3 restrained, doable enhancements in Memento.
-F) Human-only verification checklist for unreadable text, names, dates, rosters, captions, permissions, and adult approval.
+OUTPUT FORMAT — FOLLOW THIS EXACT STRUCTURE. It must be easy for a HIGH SCHOOL STUDENT to use as a revision checklist, not a vague critique. DO NOT stop after three changes or cap the number of findings:
+
+1. TEMPLATE CHECK: Name the selected template and whether the student page matches it. Distinguish visible errors from anything too small to verify.
+2. WHAT WORKS: List up to three specific strengths backed by visible evidence (fewer if needed).
+3. THREE REVIEW WAVES, ALWAYS IN THIS ORDER:
+   WAVE 1 — LAYOUT: assigned template, page structure, required blocks, placement, alignment, bleed/margins, double-page gutter, required story/photo/caption/graphic positions.
+   WAVE 2 — DESIGN: dominant/supporting photos, crops, balance, hierarchy, typographic presentation, captions, informational graphics using REAL reported facts, purposeful Field Guide style.
+   WAVE 3 — TEXT / GRAMMAR: visibly legible spelling, capitalization, punctuation, sentence clarity, headline/deck, caption wording, attribution, text overflow and awkward line breaks. Identify unreadable copy as HUMAN CHECK instead of guessing.
+
+WITHIN EACH WAVE, divide findings into these priority subheadings, in this exact order:
+  MUST DO — errors violating the official template, required content, readability or basic correctness; must be corrected before approval.
+  NEED TO DO NEXT — meaningful improvements to quality, clarity, visual hierarchy or reporting presentation.
+  OPTIONAL POLISH — genuinely optional, restrained details; do not suggest filler merely to decorate.
+
+For EACH finding:
+- Begin with an unchecked box [ ] and a short action title.
+- WHERE: state the exact page/column/photo/text region.
+- PROBLEM: describe what you can actually observe; do not invent unseen text.
+- FIX IN MEMENTO: give 1–3 concrete instructions the student can carry out without abandoning their assigned template.
+- WHY: one sentence explaining why the change matters.
+If no issues are evident in a particular priority group, say “No clearly visible findings” instead of inventing problems. Identify as many genuine findings as the attachments support; do not stop at three.
+
+4. FACT CHECK / HUMAN REVIEW: bullet every unreadable or unverified item (students' names, quotes, rosters, statistics, dates, captions, photo permissions, sponsor/coach, and content requiring adult verification). Never pretend an image proves a fact is accurate.
+5. MEANINGFUL GRAPHIC IDEAS: when appropriate, suggest up to two informational graphics that use real data the staffer must gather. Do not prescribe fabricated numbers, fake polls, or generic clip art.
+6. REVISION ORDER: Briefly remind the student: fix MUST DO items in Layout first, then Design, then Text/Grammar; address NEED TO DO NEXT items afterward; finish with OPTIONAL POLISH only if appropriate. Do not mark any boxes as completed.
+7. RECHECK INSTRUCTIONS: Tell the student to revise in Memento, upload the revised spread to this same Gemini conversation with the official template, and request a recheck of unresolved issues.
+
+IMPORTANT: Do not assert that any corrections were made. You cannot edit the student's Memento spread. Your response is guidance, not final advisor approval.
 Be direct, useful, and encouraging; never declare the spread approved or complete.`;
 }
 function refreshTemplate(){
@@ -122,6 +155,7 @@ function render(){
  if(step===1&&!el("upload").files.length)el("guide-message").textContent="Choose a spread before moving to the next step.";
  if(step===2&&el("reference-download").hidden)el("guide-message").textContent="Wait until the official template finishes loading.";
 }
+el("copy-recheck").addEventListener("click",async()=>{const message="I revised my spread in Memento. I have attached the REVISED student spread and the SAME official template again. Compare the revised spread with your prior three-wave feedback. For each previous MUST DO and NEED TO DO NEXT item, mark RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY with visual evidence. List any newly visible issues, organized into Layout, Design, Text/Grammar and prioritized MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do not invent details or approve the page.";try{await navigator.clipboard.writeText(message);el("recheck-status").textContent="Recheck instructions copied. Paste into your existing Gemini conversation and attach the revised spread plus template."}catch{el("recheck-status").textContent="Copy unavailable; select and copy the recheck instructions from this page manually."}});
 el("start-guide").addEventListener("click",open);
 el("upload").addEventListener("change",()=>{if(!overlay.hidden&&step===1)render()});
 el("guide-close").addEventListener("click",close);
