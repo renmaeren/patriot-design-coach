@@ -7,10 +7,32 @@
 #guide-panel h2{font-size:26px;margin:7px 0 12px}#guide-panel p{line-height:1.65}#guide-progress{font:700 13px Arial,sans-serif;color:#792f3b;letter-spacing:.07em}
 .guide-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.guide-actions button,.guide-actions a{border:0;background:#792f3b;color:white;padding:12px 15px;border-radius:3px;font:700 15px Arial,sans-serif;text-decoration:none;cursor:pointer}.guide-actions .subtle{background:#eae1d3;color:#172b43}.guide-actions :disabled{opacity:.45;cursor:default}#guide-message{font:14px Arial,sans-serif;color:#792f3b;min-height:1.4em;margin-top:9px}
 </style></head><body><header><small>THE PATRIOT · VOL. 52 · 2026–2027</small><h1>AI Spread Review Lab</h1><p>Compare the real page. Request specific corrections. Revise in Memento.</p><a href="./">← Back to Design Coach</a></header><main>
-<p class="note"><strong>This is a guided Gemini handoff, not automatic AI inside the website.</strong> Your file stays in this browser preview. To request AI feedback, copy the prepared instructions and deliberately attach the spread and official template in your <em>district-approved</em> Gemini account. Do not upload unpublished student content to an unapproved account.</p><div class="card" style="border-left:5px solid #792f3b"><h2>Start here: Guided Gemini Review</h2><p>Not sure what to do? Follow one short instruction at a time. The Coach will remind you exactly what to save, copy, and attach.</p><button class="btn" id="start-guide" type="button">Start Guided Review →</button><p class="sub">Experienced staffers can use the regular controls below instead.</p></div>
+<p class="note"><strong>This Design Coach helps you prepare focused Gemini reviews—it does not analyze the files itself.</strong> Your file stays in this browser preview. To request AI feedback, copy the prepared instructions and deliberately attach the spread and official template in your <em>district-approved</em> Gemini account. Do not upload unpublished student content to an unapproved account.</p><div class="card" hidden style="border-left:5px solid #792f3b"><h2>Start here: Guided Gemini Review</h2><p>Not sure what to do? Follow one short instruction at a time. The Coach will remind you exactly what to save, copy, and attach.</p><button class="btn" id="start-guide" type="button">Start Guided Review →</button><p class="sub">Experienced staffers can use the regular controls below instead.</p></div>
 <section class="card"><h2>01 · Identify the assigned template</h2><div class="grid"><div><label for="section">Yearbook section</label><select id="section"></select></div><div><label for="template">Approved template</label><select id="template"></select></div></div><div class="grid" style="margin-top:14px"><div><label for="spread-id">Spread title or working ID</label><input id="spread-id" placeholder="e.g., Volleyball · pages 42–43"></div><div><label for="review-round">Which visit/review round is this for THIS spread?</label><select id="review-round"><option value="">Choose review round…</option><option value="1">1st review — Original draft</option><option value="2">2nd review — First revisions</option><option value="3">3rd review</option><option value="4">4th review</option><option value="5">5th review</option><option value="6">6th review</option><option value="7">7th review</option><option value="8">8th review</option><option value="9">9th review</option><option value="10">10th review</option><option value="11">11th review</option><option value="12">12th review</option><option value="13">13th review</option><option value="14">14th review</option><option value="15">15th review</option><option value="16">16th review or later</option></select></div></div><p class="sub"><strong>Track this particular spread, not how many times you have used the website.</strong> Example: If this is the eighth time you have reviewed the Volleyball spread, choose 8th review. The number is student-reported; the Coach cannot verify previous visits.</p><p id="target" class="sub">Loading approved template references…</p><p id="reference-status" class="status"></p></section>
 <section class="card"><h2>02 · Compare your spread</h2><div class="grid"><div><h3>Your uploaded spread</h3><label for="upload">PNG / JPG / PDF (local preview)</label><input id="upload" type="file" accept="image/png,image/jpeg,image/webp,application/pdf"><div class="preview" id="student-preview"><div class="empty">Choose a screenshot or PDF to view it here.</div></div><p id="file-status" class="sub">No file selected. The website does not upload or save your spread.</p></div><div><h3>Official template reference</h3><div class="preview" id="official-preview"><div class="empty">Loading the approved template…</div></div><p class="sub">Compare the required placement of photos, story, captions, labels, and informational graphics. A–C are single pages; D–E are doubles.</p><a id="reference-download" class="btn ghost" download="approved-template.png" href="#" hidden>Save Official Template for Gemini</a></div></div></section>
-<section class="card"><h2>03 · Review your spread with school Gemini</h2><p class="note"><strong>Three steps:</strong> Copy the prepared critique instructions below, open Gemini in a new tab, then attach <strong>both files</strong>: (1) your Memento spread and (2) the official template from Step 2. Google Gemini cannot automatically see files you uploaded to this Design Coach.</p><div class="grid"><div><label for="topic">Spread topic</label><input id="topic" placeholder="e.g., Pep Club / Senior Picnic / Ag Mechanics"></div><div><label for="page-number">Page number(s), optional</label><input id="page-number" placeholder="e.g., 42–43"></div></div><p class="sub">These instructions update automatically for your selected template. Check that both the student spread and the official template are attached in Gemini before submitting the request. Gemini cannot verify unseen or illegible details.</p><label for="prompt">Prepared instructions for Gemini</label><textarea id="prompt" readonly></textarea><button class="btn" id="copy">1 · Copy Review Instructions</button><a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Open School Gemini ↗</a><p id="copy-status" class="status" role="status"></p><div class="note"><strong>In Gemini:</strong> Paste the copied instructions, use the attachment/paperclip control to upload your spread and the saved official reference image, then send. Gemini should report every visible issue in three waves (Layout, Design, Text/Grammar), ranked MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Fix required issues before polishing. Never treat Gemini feedback as advisor approval.</div></section>
+<section class="card" id="review-waves" style="border-top:6px solid #792f3b">
+<h2>03 · Four Focused Gemini Review Waves</h2>
+<p>Work through these reviews <strong>one at a time</strong> for this spread. Each wave has a different goal. After each, make corrections in Memento and have Gemini recheck them before moving on.</p>
+<div class="note"><strong>Keep one Gemini conversation for the entire spread.</strong> Reuse the original conversation, and attach the newest export of your spread whenever you ask for a new review. Gemini cannot see changes you made in Memento unless you attach the updated file.</div>
+<div class="grid" style="margin-top:16px">
+<div><label for="wave-select">Choose your current wave</label><select id="wave-select">
+<option value="0">Wave 1 — Organization &amp; Layout</option>
+<option value="1">Wave 2 — Visual Design</option>
+<option value="2">Wave 3 — Writing &amp; Copy Editing</option>
+<option value="3">Wave 4 — Final Overall Review</option>
+</select></div>
+<div><label for="student-name">Student name (for the report)</label><input id="student-name" placeholder="First and last name"></div>
+</div>
+<div style="margin:20px 0;background:#f1e9dc;padding:17px;border-left:4px solid #792f3b"><div class="tag" id="wave-tag">WAVE 1 OF 4</div><h3 id="wave-title">Organization &amp; Layout</h3><p id="wave-goal"></p><p id="wave-files" class="sub"></p></div>
+<label for="wave-prompt">Prepared instructions for this wave</label><textarea id="wave-prompt" readonly style="min-height:230px"></textarea>
+<button class="btn" type="button" id="wave-copy">1 · Copy This Wave's Instructions</button>
+<a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Open School Gemini ↗</a>
+<p id="wave-copy-status" class="status" role="status"></p>
+<div class="note"><strong>In Gemini:</strong> paste the prompt and attach the required files. After Gemini responds, fix the problems in Memento. Export a fresh version of your spread, then run the recheck below. <strong>Do not treat an AI response as advisor approval.</strong></div>
+<h3>Recheck after you revise</h3><p>Stay in the <strong>same Gemini conversation</strong>. Export your revised spread, attach it with the official template, and ask Gemini to check the changes from this wave.</p>
+<button class="btn ghost" id="wave-recheck" type="button">Copy Recheck Instructions for This Wave</button><p id="wave-recheck-status" class="status" role="status"></p>
+<div style="border-top:1px solid #cdbfa9;padding-top:14px;margin-top:12px"><label class="inlinecheck"><input id="wave-revised" type="checkbox"><span>I revised this wave's findings in Memento, sent the updated spread to Gemini for a recheck, and reviewed what remains unresolved. (Self-reported; not automatic verification.)</span></label><button class="btn alt" id="wave-next" type="button">Continue to Next Wave →</button><p class="sub" id="wave-next-status">Complete Wave 1 and its recheck before continuing. Any unresolved items must still appear in your final report.</p></div>
+</section><section class="card" hidden><h2>03 · Review your spread with school Gemini</h2><p class="note"><strong>Three steps:</strong> Copy the prepared critique instructions below, open Gemini in a new tab, then attach <strong>both files</strong>: (1) your Memento spread and (2) the official template from Step 2. Google Gemini cannot automatically see files you uploaded to this Design Coach.</p><div class="grid"><div><label for="topic">Spread topic</label><input id="topic" placeholder="e.g., Pep Club / Senior Picnic / Ag Mechanics"></div><div><label for="page-number">Page number(s), optional</label><input id="page-number" placeholder="e.g., 42–43"></div></div><p class="sub">These instructions update automatically for your selected template. Check that both the student spread and the official template are attached in Gemini before submitting the request. Gemini cannot verify unseen or illegible details.</p><label for="prompt">Prepared instructions for Gemini</label><textarea id="prompt" readonly></textarea><button class="btn" id="copy">1 · Copy Review Instructions</button><a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Open School Gemini ↗</a><p id="copy-status" class="status" role="status"></p><div class="note"><strong>In Gemini:</strong> Paste the copied instructions, use the attachment/paperclip control to upload your spread and the saved official reference image, then send. Gemini should report every visible issue in three waves (Layout, Design, Text/Grammar), ranked MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Fix required issues before polishing. Never treat Gemini feedback as advisor approval.</div></section>
 <section class="card"><h2>04 · Use Gemini's feedback to revise your spread</h2><p><strong>Do not stop when Gemini answers.</strong> The goal is to make corrections in Memento, not just receive a review.</p>
 <ol style="line-height:1.65;padding-left:25px">
 <li><strong>Read the entire Gemini response.</strong> It should give you THREE waves: <b>1. Layout, 2. Design, 3. Text/Grammar.</b> If a wave is missing, ask Gemini: <em>“Please finish the missing review wave and list every issue you can actually see.”</em></li>
@@ -23,7 +45,7 @@
 </ol>
 <div class="note"><strong>Priority key:</strong> <b>MUST DO</b> = incorrect template use, missing required elements, illegible text, or other problems blocking approval. <b>NEED TO DO NEXT</b> = important quality improvements. <b>OPTIONAL POLISH</b> = small, nonessential Field Guide enhancements. An item can appear in any of the three review waves.</div>
 <p class="sub">Keep Gemini's response as your revision checklist; you do not have to retype every finding into the manual Spread Inspection Studio.</p>
-<button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section><section class="card" id="recheck-revisions" style="border-top:5px solid #792f3b"><h2>05 · Recheck My Revised Spread</h2>
+<button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section><section class="card" hidden id="recheck-revisions" style="border-top:5px solid #792f3b"><h2>05 · Recheck My Revised Spread</h2>
 <p><strong>Already received Gemini feedback and made corrections in Memento?</strong> Come back here to start a second review. You do not need to redo the whole guided setup.</p>
 <ol style="line-height:1.7;padding-left:25px">
 <li>Export or screenshot your <strong>revised</strong> spread from Memento. Keep your original Gemini conversation open or find it in your Gemini history.</li>
@@ -225,5 +247,89 @@ el("guide-action").addEventListener("click",async()=>{
  if(step===4){window.open("https://gemini.google.com/app","_blank","noopener,noreferrer");visitedGemini=true;el("guide-message").textContent="Gemini opened in a new tab. Paste the instructions and attach BOTH files before sending.";return}
  if(step===5){close();el("copy-status").textContent="Review guide completed. Make your revisions in Memento and follow your editor’s approval process."}
 });
+})();
+</script><script>
+(function(){
+const get=id=>document.getElementById(id);
+const waves=[
+{name:"Organization & Layout",focus:"Structure first: correct official template, page count, headline and story blocks, photos, captions, required group photos/rosters/sponsors where appropriate, informational graphic areas, margins, alignment and center gutter.",exclude:"Do not critique colors, decorative styling, or grammar unless those make a required item illegible.",files:"Attach the current spread AND the official template reference."},
+{name:"Visual Design",focus:"Polish the layout you already established: photograph choice, crop, image hierarchy, typography, contrast, readability, visual balance and purposeful Field Guide styling. Evaluate whether cutaway graphics communicate real reported information, not empty clip art.",exclude:"Do not rearrange the approved template or turn this into a grammar review.",files:"Attach your LATEST revised spread AND the official template. Keep the earlier feedback in this Gemini conversation."},
+{name:"Writing & Copy Editing",focus:"Edit the writing actually visible: headlines, deck, story, captions, labels, attribution, spelling, punctuation, grammar, clarity, wordiness, repetition, awkward line breaks and copyfit. Separately flag names, quotes, rosters, statistics, dates and permissions for HUMAN verification.",exclude:"Never invent text you cannot read and do not critique decorative design except where readability suffers.",files:"Attach the LATEST revised spread and a legible text copy if small writing cannot be read. Attach the official template when available."},
+{name:"Final Overall Review",focus:"Review the completed page as a whole against the official template, the ORIGINAL version and the previous three wave reviews. Identify anything still missing, incorrect or inconsistent; note improvements, regressions, unresolved issues and human approval requirements.",exclude:"Do not declare the spread publication-ready or fabricate resolved issues. This is a final AI review before adult approval.",files:"Attach the ORIGINAL spread, the LATEST spread and the OFFICIAL template. Gemini must see previous wave history or explicitly say it is unavailable."}
+];
+function context(){
+const s=get("section").value,t=Number(get("template").value);
+return {s,t,name:get("spread-id").value.trim()||"[spread title missing]",student:get("student-name").value.trim()||"[student name not entered]",round:get("review-round").value||"[round not selected]",topic:get("topic").value.trim()||"[topic not provided]",page:get("page-number").value.trim()||"[pages not provided]"};
+}
+function wavePrompt(i){
+const d=context(),w=waves[i];
+return `You are a careful, constructive HIGH SCHOOL YEARBOOK DESIGN COACH for Allen County–Scottsville High School's 2026–27 THE PATRIOT: A FIELD GUIDE.
+STUDENT: ${d.student}
+SPREAD: ${d.name} | TOPIC: ${d.topic} | PAGES: ${d.page}
+ASSIGNED SECTION: ${d.s}
+ASSIGNED TEMPLATE: ${"ABCDE"[d.t]} — ${window.patriotNames[d.s][d.t]}
+STUDENT-REPORTED REVIEW ROUND FOR THIS SPREAD: ${d.round} (not verified)
+THIS REVIEW: WAVE ${i+1} OF 4 — ${w.name.toUpperCase()}.
+
+YOUR ONE GOAL FOR THIS WAVE:
+${w.focus}
+SCOPE LIMITS: ${w.exclude}
+REQUIRED EVIDENCE: ${w.files}
+The approved template is authoritative: A–C single pages, D–E double spreads. If required attachments are missing, ask for them instead of making up a comparison. Do not invent text, names, captions, quotes, grades, statistics, rosters or anything visually unreadable.
+
+FORMAT YOUR RESPONSE:
+1. WAVE ${i+1} — ${w.name.toUpperCase()}: one-paragraph assessment supported by visible evidence.
+2. EVERY CLEARLY VISIBLE ACTIONABLE FINDING, NOT JUST THREE. Group by MUST DO (approval-blocking problems), NEED TO DO NEXT (important changes) and OPTIONAL POLISH (optional refinement). Under each group number every finding and include:
+ [ ] WHAT AND WHERE: precise page region or line
+ PROBLEM: what you can actually see
+ HOW TO FIX IN MEMENTO: specific steps within the official template
+ WHY IT MATTERS: one clear sentence.
+Say “No clearly visible findings” when a group has none. Do not invent issues for a quota.
+3. WHAT IS IMPROVED VS THE PREVIOUS REVIEW: only when earlier files and feedback are present. Distinguish evidence-based resolution from student claims.
+4. HUMAN CHECKS: list unreadable or unverified names, facts, quotes, captions and approvals.
+5. END WITH “REVISE THIS WAVE IN MEMENTO, EXPORT THE UPDATE, THEN ASK ME TO RECHECK THE SAME WAVE.” Do not mark boxes complete or pretend you have edited the file.
+
+Focus on THIS wave, not all four at once. Be specific, clear, and student-friendly.`;
+}
+function recheckPrompt(i){
+const d=context(),w=waves[i];
+return `RECHECK WAVE ${i+1} — ${w.name.toUpperCase()} for ${d.name}, student-reported visit ${d.round}. I have revised the spread in Memento and attached my LATEST version and the OFFICIAL template. Compare this to your previous WAVE ${i+1} findings in THIS conversation. For EVERY original finding label RESOLVED WITH VISIBLE EVIDENCE, STILL NEEDS WORK, or CANNOT VERIFY; describe exactly what changed or still needs fixing. Identify any new issues in this wave, grouped MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do NOT invent progress, claim to edit the page, or approve it. Finish with all remaining MUST DO and NEED TO DO NEXT items. If prior feedback is missing, explicitly request it.`;
+}
+let completed=[false,false,false,false];
+function render(){
+let i=Number(get("wave-select").value),w=waves[i];
+get("wave-tag").textContent="WAVE "+(i+1)+" OF 4";get("wave-title").textContent=w.name;get("wave-goal").textContent=w.focus;get("wave-files").textContent=w.files;
+get("wave-prompt").value=wavePrompt(i);
+get("wave-revised").checked=completed[i];
+get("wave-next").textContent=i===3?"Go to Production Report ↓":"Continue to Next Wave →";
+get("wave-next-status").textContent=i===3?"After the final overall recheck, generate your Production Revision Report.":"Complete this wave and its recheck before continuing. Keep unresolved items in your final report.";
+get("wave-copy-status").textContent="";get("wave-recheck-status").textContent="";
+}
+async function copy(txt,status){
+try{await navigator.clipboard.writeText(txt);get(status).textContent="Copied. Paste into your existing school Gemini conversation, with the required attachments."}
+catch{get(status).textContent="Clipboard unavailable. Select the instructions above, then copy with Ctrl+C."}
+}
+get("wave-select").addEventListener("change",render);
+get("section").addEventListener("change",render);get("template").addEventListener("change",render);
+["spread-id","student-name","review-round","topic","page-number"].forEach(id=>get(id).addEventListener("input",render));
+get("wave-copy").addEventListener("click",()=>copy(get("wave-prompt").value,"wave-copy-status"));
+get("wave-recheck").addEventListener("click",()=>copy(recheckPrompt(Number(get("wave-select").value)),"wave-recheck-status"));
+get("wave-revised").addEventListener("change",()=>{completed[Number(get("wave-select").value)]=get("wave-revised").checked});
+get("wave-next").addEventListener("click",()=>{const i=Number(get("wave-select").value);
+if(!completed[i]){get("wave-next-status").textContent="First confirm you made revisions in Memento AND asked Gemini to recheck this wave. You can return later; this checkbox is your own declaration.";return}
+if(i<3){get("wave-select").value=String(i+1);render();get("review-waves").scrollIntoView({behavior:"smooth",block:"start"})}
+else{get("production-report").scrollIntoView({behavior:"smooth",block:"start"})}
+});
+window.patriotNames={
+"Academics":["Course Snapshot","Learning in the Field","Beyond the Classroom","The Academic Experience","Pathways & Possibilities"],
+"Student Life":["A Day at ACSHS","Student Perspective","Places & Spaces","Student Life Feature","Many Sides of Student Life"],
+"Clubs & Organizations":["Club Profile","In Action","Members & Moments","Club Spotlight","More Than a Club"],
+"Faculty & Staff":["Resident Expert Record","Observed at Work","Tools of the Trade","Resident Expert Spotlight","The Work Behind ACSHS"],
+"Sports":["Team Snapshot","Game Day","Behind the Jersey","The Team Story","More Than a Game"],
+"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],
+"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],
+"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]
+};
+render();
 })();
 </script></body></html>
