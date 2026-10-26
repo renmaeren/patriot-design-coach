@@ -11,7 +11,16 @@
 const CLIENT_ID="615687686127-nsgnfiamokofn4q222qb25tn7aei7kkh.apps.googleusercontent.com";
 const ENDPOINT="https://patriot-design-coach-api.maegan-renick.workers.dev/";
 const $=s=>document.getElementById(s);
-const names={"Academics":["A","B","C","D","E"],"Student Life":["A","B","C","D","E"],"Clubs & Organizations":["A","B","C","D","E"],"Faculty & Staff":["A","B","C","D","E"],"Sports":["A","B","C","D","E"],"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]};
+const names={
+"Academics":["Course Snapshot","Learning in the Field","Beyond the Classroom","The Academic Experience","Pathways & Possibilities"],
+"Student Life":["A Day at ACSHS","Student Perspective","Places & Spaces","Student Life Feature","Many Sides of Student Life"],
+"Clubs & Organizations":["Club Profile","In Action","Members & Moments","Club Spotlight","More Than a Club"],
+"Faculty & Staff":["Resident Expert Record","Observed at Work","Tools of the Trade","Resident Expert Spotlight","The Work Behind ACSHS"],
+"Sports":["Team Snapshot","Game Day","Behind the Jersey","The Team Story","More Than a Game"],
+"Seniors":["Identification Plate","Observed in the Field","Field Collection","The Senior Spotlight","The Class Story"],
+"Fine Arts":["Program Profile","In Rehearsal / In the Studio","Performance / Final Product","Fine Arts Showcase","Behind the Scenes"],
+"Appendices":["Index / Catalog","Glossary","Chronology","Patriot Collection","Data & Records"]
+};
 let token="",images={},reference="",refMime="image/png",studentFile=null,lastFeedback=null,studentPreviewURL=null;
 function state(msg){$("status").textContent=msg}
 function ready(){ $("analyze").disabled=!(token&&studentFile&&reference&&$("fictional").checked) }
