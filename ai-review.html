@@ -6,7 +6,7 @@
 #guide-panel{background:#fffdf8;color:#172b43;border:4px solid #792f3b;border-radius:7px;max-width:590px;width:100%;max-height:92vh;overflow:auto;padding:24px;box-shadow:0 14px 45px #0006}
 #guide-panel h2{font-size:26px;margin:7px 0 12px}#guide-panel p{line-height:1.65}#guide-progress{font:700 13px Arial,sans-serif;color:#792f3b;letter-spacing:.07em}
 .guide-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.guide-actions button,.guide-actions a{border:0;background:#792f3b;color:white;padding:12px 15px;border-radius:3px;font:700 15px Arial,sans-serif;text-decoration:none;cursor:pointer}.guide-actions .subtle{background:#eae1d3;color:#172b43}.guide-actions :disabled{opacity:.45;cursor:default}#guide-message{font:14px Arial,sans-serif;color:#792f3b;min-height:1.4em;margin-top:9px}
-</style></head><body><header><small>THE PATRIOT · VOL. 52 · 2026–2027</small><h1>AI Spread Review Lab</h1><p>Compare the real page. Request specific corrections. Revise in Memento.</p><a href="./">← Back to Design Coach</a></header><main>
+</style><script defer src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script></head><body><header><small>THE PATRIOT · VOL. 52 · 2026–2027</small><h1>AI Spread Review Lab</h1><p>Compare the real page. Request specific corrections. Revise in Memento.</p><a href="./">← Back to Design Coach</a></header><main>
 <p class="note"><strong>This Design Coach helps you prepare focused Gemini reviews—it does not analyze the files itself.</strong> Your file stays in this browser preview. To request AI feedback, copy the prepared instructions and deliberately attach the spread and official template in your <em>district-approved</em> Gemini account. Do not upload unpublished student content to an unapproved account.</p><div class="card" hidden style="border-left:5px solid #792f3b"><h2>Start here: Guided Gemini Review</h2><p>Not sure what to do? Follow one short instruction at a time. The Coach will remind you exactly what to save, copy, and attach.</p><button class="btn" id="start-guide" type="button">Start Guided Review →</button><p class="sub">Experienced staffers can use the regular controls below instead.</p></div>
 <section class="card"><h2>01 · Identify the assigned template</h2><div class="grid"><div><label for="section">Yearbook section</label><select id="section"></select></div><div><label for="template">Approved template</label><select id="template"></select></div></div><div class="grid" style="margin-top:14px"><div><label for="spread-id">Spread title or working ID</label><input id="spread-id" placeholder="e.g., Volleyball · pages 42–43"></div><div><label for="review-round">Which visit/review round is this for THIS spread?</label><select id="review-round"><option value="">Choose review round…</option><option value="1">1st review — Original draft</option><option value="2">2nd review — First revisions</option><option value="3">3rd review</option><option value="4">4th review</option><option value="5">5th review</option><option value="6">6th review</option><option value="7">7th review</option><option value="8">8th review</option><option value="9">9th review</option><option value="10">10th review</option><option value="11">11th review</option><option value="12">12th review</option><option value="13">13th review</option><option value="14">14th review</option><option value="15">15th review</option><option value="16">16th review or later</option></select></div></div><p class="sub"><strong>Track this particular spread, not how many times you have used the website.</strong> Example: If this is the eighth time you have reviewed the Volleyball spread, choose 8th review. The number is student-reported; the Coach cannot verify previous visits.</p><p id="target" class="sub">Loading approved template references…</p><p id="reference-status" class="status"></p></section>
 <section class="card"><h2>02 · Compare your spread</h2><div class="grid"><div><h3>Your uploaded spread</h3><label for="upload">PNG / JPG / PDF (local preview)</label><input id="upload" type="file" accept="image/png,image/jpeg,image/webp,application/pdf"><div class="preview" id="student-preview"><div class="empty">Choose a screenshot or PDF to view it here.</div></div><p id="file-status" class="sub">No file selected. This is a local comparison preview only. Gemini will NOT receive this file—you must attach the Memento export again in Gemini.</p></div><div><h3>Official template reference</h3><div class="preview" id="official-preview"><div class="empty">Loading the approved template…</div></div><p class="sub">Compare the required placement of photos, story, captions, labels, and informational graphics. A–C are single pages; D–E are doubles.</p><a id="reference-download" class="btn ghost" download="approved-template.png" href="#" hidden>Save Official Template for Gemini</a></div></div></section>
@@ -26,6 +26,10 @@
 </div>
 <div style="margin:20px 0;background:#f1e9dc;padding:17px;border-left:4px solid #792f3b"><div class="tag" id="wave-tag">WAVE 1 OF 4</div><h3 id="wave-title">Organization &amp; Layout</h3><p id="wave-goal"></p><p id="wave-files" class="sub"></p></div>
 <label for="wave-prompt">Prepared instructions for this wave</label><textarea id="wave-prompt" readonly style="min-height:230px"></textarea>
+<div class="note" style="margin:14px 0"><strong>One-file option:</strong> Upload your Memento spread above, then choose <b>Download One Gemini PDF</b>. Your PDF will contain the review instructions, official template and student spread on separate pages. For Wave 4, also provide the original draft below. <strong>No ZIP or unzipping.</strong></div>
+<div id="wave-original-wrap" hidden><label for="original-upload">Wave 4 only — original spread (before revisions)</label><input id="original-upload" type="file" accept="image/png,image/jpeg,image/webp,application/pdf"><p class="sub">Required for the final before-and-after comparison.</p></div>
+<button class="btn" type="button" id="download-pdf">Download One Gemini PDF ↓</button>
+<p class="status" id="pdf-status" role="status"></p>
 <button class="btn" type="button" id="wave-copy">1 · Copy This Wave's Instructions</button>
 <a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">2 · Open School Gemini ↗</a>
 <p id="wave-copy-status" class="status" role="status"></p>
@@ -304,12 +308,80 @@ get("wave-prompt").value=wavePrompt(i);
 get("wave-revised").checked=completed[i];
 get("wave-next").textContent=i===3?"Go to Production Report ↓":"Continue to Next Wave →";
 get("wave-next-status").textContent=i===3?"After the final overall recheck, generate your Production Revision Report.":"Complete this wave and its recheck before continuing. Keep unresolved items in your final report.";
+get("wave-original-wrap").hidden=i!==3;
 get("wave-copy-status").textContent="";get("wave-recheck-status").textContent="";
 }
 async function copy(txt,status){
 try{await navigator.clipboard.writeText(txt);get(status).textContent="Copied. Paste into your existing school Gemini conversation, with the required attachments."}
 catch{get(status).textContent="Clipboard unavailable. Select the instructions above, then copy with Ctrl+C."}
 }
+
+async function geminiPDF(){
+ const state=get("pdf-status"),studentFile=get("upload").files[0],reference=get("reference-download"),wave=Number(get("wave-select").value),original=get("original-upload").files[0];
+ if(!studentFile){state.textContent="First upload your exported Memento spread in Step 02.";get("upload").focus();return;}
+ if(reference.hidden||!reference.href||reference.href.endsWith("#")){state.textContent="The official template has not loaded. Select a valid template first.";return;}
+ if(wave===3&&!original){state.textContent="For the final review, select the ORIGINAL pre-revision spread as well.";get("original-upload").focus();return;}
+ if(!window.PDFLib){state.textContent="PDF generator unavailable. Check your connection and reload the Coach.";return;}
+ state.textContent="Building your PDF on this device…";
+ try{
+  const {PDFDocument,StandardFonts,rgb}=window.PDFLib,pdf=await PDFDocument.create(),font=await pdf.embedFont(StandardFonts.Helvetica),bold=await pdf.embedFont(StandardFonts.HelveticaBold);
+  const prompt=get("wave-prompt").value;
+  function ascii(s){return s.normalize("NFKD").replace(/[\u2010-\u2015]/g,"-").replace(/[\u2018\u2019]/g,"'").replace(/[\u201c\u201d]/g,'"').replace(/[^\x20-\x7e]/g," ")}
+  function writeIntro(){
+   const width=612,height=792,margin=46,lineHeight=14;
+   let page=pdf.addPage([width,height]),y=height-margin;
+   const next=()=>{page=pdf.addPage([width,height]);y=height-margin};
+   function line(content,heavy=false,size=10){if(y<margin+lineHeight)next();page.drawText(ascii(content),{x:margin,y,size,font:heavy?bold:font,color:rgb(.1,.17,.27)});y-=lineHeight+(heavy?5:0)}
+   line("THE PATRIOT - GEMINI REVIEW PACKET",true,17);line("Wave "+(wave+1)+" of 4: "+get("wave-title").textContent,true,12);
+   line("FILES INCLUDED: Official Template / Current Student Spread"+(wave===3?" / Original Student Spread":""),false,9);
+   y-=12;line("INSTRUCTIONS FOR GEMINI",true,12);
+   for(const paragraph of prompt.split("\n")){
+    if(!paragraph.trim()){y-=8;continue}
+    const words=ascii(paragraph).split(/\s+/);let s="";
+    for(const word of words){const combined=s?s+" "+word:word;
+     if(font.widthOfTextAtSize(combined,9)>width-2*margin&&s){line(s,false,9);s=word}else s=combined;
+    }
+    if(s)line(s,false,9);
+   }
+   next();line("REFERENCE AND STUDENT FILES",true,13);
+   line("The following pages contain the actual full-size reference and student exports.",false,10);
+   line("Do not mistake the OFFICIAL TEMPLATE for the STUDENT SPREAD.",false,10);
+  }
+  async function addImagePage(blob,label){
+   let type=blob.type.toLowerCase(),data=new Uint8Array(await blob.arrayBuffer()),embedded;
+   if(type==="image/png")embedded=await pdf.embedPng(data);
+   else if(type==="image/jpeg"||type==="image/jpg")embedded=await pdf.embedJpg(data);
+   else {
+    const bitmap=await createImageBitmap(blob),canvas=document.createElement("canvas");canvas.width=bitmap.width;canvas.height=bitmap.height;
+    const ctx=canvas.getContext("2d");ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(bitmap,0,0);bitmap.close();
+    const jpeg=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.95));
+    if(!jpeg)throw Error("Could not convert image to PDF format");
+    embedded=await pdf.embedJpg(new Uint8Array(await jpeg.arrayBuffer()));
+   }
+   const max=1150,scale=Math.min(1,max/Math.max(embedded.width,embedded.height)),w=embedded.width*scale,h=embedded.height*scale;
+   const page=pdf.addPage([Math.max(400,w+36),Math.max(120,h+70)]),pw=page.getWidth(),ph=page.getHeight();
+   page.drawText(label,{x:18,y:ph-25,size:13,font:bold,color:rgb(.1,.17,.27)});
+   page.drawImage(embedded,{x:(pw-w)/2,y:20,width:w,height:h});
+  }
+  async function addFile(blob,label){
+   if(blob.type==="application/pdf"||blob.name?.toLowerCase().endsWith(".pdf")){
+    const originalPDF=await PDFDocument.load(new Uint8Array(await blob.arrayBuffer()));
+    const pages=await pdf.copyPages(originalPDF,originalPDF.getPageIndices());
+    for(const page of pages)pdf.addPage(page);
+   }else await addImagePage(blob,label);
+  }
+  writeIntro();
+  const referenceData=await fetch(reference.href).then(r=>{if(!r.ok)throw Error("Template image unavailable");return r.blob()});
+  await addFile(referenceData,"OFFICIAL TEMPLATE - Approved layout");
+  await addFile(studentFile,"STUDENT SPREAD - Current Memento export");
+  if(wave===3)await addFile(original,"ORIGINAL STUDENT SPREAD - Before revisions");
+  const data=await pdf.save(),url=URL.createObjectURL(new Blob([data],{type:"application/pdf"})),link=document.createElement("a");
+  link.href=url;link.download="Patriot-"+(get("spread-id").value.trim()||"Spread").replace(/[^a-z0-9_-]+/gi,"-").slice(0,60)+"-Wave-"+(wave+1)+"-Gemini-Review.pdf";
+  document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  state.textContent="PDF downloaded. In Gemini, attach this ONE PDF and paste the review instructions for this wave.";
+ }catch(e){state.textContent="Could not create the PDF: "+e.message+". You can still attach the two separate files in Gemini."}
+}
+get("download-pdf").addEventListener("click",geminiPDF);
 get("wave-select").addEventListener("change",render);
 get("section").addEventListener("change",render);get("template").addEventListener("change",render);
 ["spread-id","student-name","review-round","topic","page-number"].forEach(id=>get(id).addEventListener("input",render));
