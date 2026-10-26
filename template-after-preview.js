@@ -15,16 +15,16 @@ function base(){before.classList.add("navy");after.classList.remove("navy")}
 function switchView(which){
  const id=++ticket,afterMode=which==="after";
  before.classList.toggle("navy",!afterMode);after.classList.toggle("navy",afterMode);
- photo.style.display=afterMode?"none":"";preview.hidden=!afterMode;
- if(title)title.textContent=afterMode?"AFTER · FIELD GUIDE EXAMPLE":"BEFORE · APPROVED TEMPLATE";
- if(intro)intro.textContent=afterMode?"See how a finished design can look. Keep the approved structure.":"This is the layout you must follow in Memento.";
+ const complete=Boolean(finished[key()]);photo.style.display=(afterMode&&complete)?"none":"";preview.hidden=!(afterMode&&complete);
+ if(title)title.textContent=afterMode?(complete?"AFTER · COMPLETE FIELD GUIDE EXAMPLE":"AFTER · OFFICIAL LAYOUT (COMPLETE EXAMPLE NOT AVAILABLE)"):"BEFORE · APPROVED TEMPLATE";
+ if(intro)intro.textContent=afterMode?(complete?"See a finished design example. Keep your assigned layout structure.":"A full-page finished example is not yet available for this option. The approved layout remains visible."):"This is the layout you must follow in Memento.";
  if(details)details.textContent=afterMode?"Use your own photographs, verified facts, captions and quotes.":"";
  if(caption)caption.textContent=afterMode?"Illustrative example (not verified ACSHS content).":"Official template";
- if(!afterMode)return;
- const choice=key(),file=finished[choice],path=file?"./field-guide/finished/"+file:"./field-guide/"+choice+".png";
+ if(!afterMode||!complete)return;
+ const choice=key(),file=finished[choice],path="./field-guide/finished/"+file;
  example.hidden=true;small.textContent="Loading example…";
  const loader=new Image();
- loader.onload=()=>{if(id!==ticket)return;example.src=path;example.hidden=false;small.textContent=file?"Full-size model · Keep the approved template structure.":"Small concept preview · This source image is cropped and not a complete page."};
+ loader.onload=()=>{if(id!==ticket)return;example.src=path;example.hidden=false;small.textContent="Complete finished example · Keep the approved template structure."};
  loader.onerror=()=>{if(id!==ticket)return;small.textContent="Example unavailable. Select Before to view the required template."};
  loader.src=path;
 }
