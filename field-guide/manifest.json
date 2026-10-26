@@ -1,0 +1,58 @@
+{
+  "01": {
+    "D": "field-guide/01-d.png",
+    "B": "field-guide/01-b.png",
+    "E": "field-guide/01-e.png",
+    "A": "field-guide/01-a.png",
+    "C": "field-guide/01-c.png"
+  },
+  "04": {
+    "B": "field-guide/04-b.png",
+    "D": "field-guide/04-d.png",
+    "C": "field-guide/04-c.png",
+    "A": "field-guide/04-a.png",
+    "E": "field-guide/04-e.png"
+  },
+  "08": {
+    "A": "field-guide/08-a.png",
+    "E": "field-guide/08-e.png",
+    "B": "field-guide/08-b.png",
+    "C": "field-guide/08-c.png",
+    "D": "field-guide/08-d.png"
+  },
+  "07": {
+    "C": "field-guide/07-c.png",
+    "D": "field-guide/07-d.png",
+    "B": "field-guide/07-b.png",
+    "E": "field-guide/07-e.png",
+    "A": "field-guide/07-a.png"
+  },
+  "02": {
+    "A": "field-guide/02-a.png",
+    "C": "field-guide/02-c.png",
+    "B": "field-guide/02-b.png",
+    "E": "field-guide/02-e.png",
+    "D": "field-guide/02-d.png"
+  },
+  "06": {
+    "C": "field-guide/06-c.png",
+    "B": "field-guide/06-b.png",
+    "A": "field-guide/06-a.png",
+    "E": "field-guide/06-e.png",
+    "D": "field-guide/06-d.png"
+  },
+  "03": {
+    "C": "field-guide/03-c.png",
+    "A": "field-guide/03-a.png",
+    "E": "field-guide/03-e.png",
+    "D": "field-guide/03-d.png",
+    "B": "field-guide/03-b.png"
+  },
+  "05": {
+    "B": "field-guide/05-b.png",
+    "E": "field-guide/05-e.png",
+    "D": "field-guide/05-d.png",
+    "C": "field-guide/05-c.png",
+    "A": "field-guide/05-a.png"
+  }
+}
