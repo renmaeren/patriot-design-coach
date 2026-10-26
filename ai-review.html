@@ -142,7 +142,7 @@ el("guide-action").addEventListener("click",async()=>{
  if(step===2){if(el("reference-download").hidden){el("guide-message").textContent="The official template has not loaded yet.";return}el("reference-download").click();savedReference=true;el("guide-message").textContent="Saved reference requested. Check your Downloads folder.";return}
  if(step===3){try{await navigator.clipboard.writeText(el("prompt").value);copied=true;el("guide-message").textContent="Instructions copied! Paste them into Gemini."}catch{el("guide-message").textContent="Clipboard unavailable. Close this guide and use Copy Review Instructions or Ctrl+C.";return}return}
  if(step===4){window.open("https://gemini.google.com/app","_blank","noopener,noreferrer");visitedGemini=true;el("guide-message").textContent="Gemini opened in a new tab. Paste the instructions and attach BOTH files before sending.";return}
- if(step===5){close();window.location.href="./inspection.html"}
+ if(step===5){close();el("copy-status").textContent="Review guide completed. Make your revisions in Memento and follow your editor’s approval process."}
 });
 })();
 </script></body></html>
