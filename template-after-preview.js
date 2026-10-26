@@ -8,7 +8,7 @@ const finished={"01-b":"academics_learning_in_the_field.png","02-a":"student_lif
 const region=originalImage.parentElement;
 const preview=document.createElement("div");preview.id="field-guide-after-image";preview.hidden=true;
 preview.style.cssText="width:100%;padding:12px;background:#fffaf0;text-align:center;border:1px solid #d7c7ad;box-sizing:border-box";
-const rendered=document.createElement("img");rendered.alt="Selected Field Guide example";rendered.style.cssText="display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:auto";
+const rendered=document.createElement("img");rendered.alt="Selected Field Guide example";rendered.style.cssText="display:block;max-width:100%;height:auto;object-fit:contain;margin:12px auto";
 const message=document.createElement("p");message.style.cssText="font:13px/1.5 Arial,sans-serif;color:#374658";
 preview.append(rendered,message);
 originalImage.insertAdjacentElement("afterend",preview);
@@ -27,17 +27,17 @@ function afterView(){
  showing=true;
  const path=file?"./field-guide/finished/"+file:"./field-guide/"+key+".png";
  before.classList.remove("navy");after.classList.add("navy");
- originalImage.style.display="none";preview.hidden=false;
+ originalImage.style.display="";preview.hidden=false;
  rendered.hidden=true;message.textContent="Loading the example…";
- if(title)title.textContent="AFTER · FINISHED FIELD GUIDE REFERENCE";
- if(intro)intro.textContent="The example below demonstrates a visual direction, not permission to change the approved template.";
+ if(title)title.textContent=file?"AFTER · FINISHED FIELD GUIDE REFERENCE":"AFTER · APPROVED TEMPLATE + SMALL CONCEPT";
+ if(intro)intro.textContent=file?"Full-size design example below; preserve the approved template above.":"The original complete template stays visible. The small crop below is only an inspiration thumbnail.";
  if(details)details.textContent=file?"Full-size finished sample; sample names, quotes and data must be verified.":"Small concept image; its source resolution may limit enlargement.";
- if(cap)cap.textContent="AFTER — "+section.value+" option "+key.slice(-1).toUpperCase()+". See the Field Guide example above.";
+ if(cap)cap.textContent="AFTER — original approved template plus "+(file?"finished reference":"small concept thumbnail")+" below.";
  const test=new Image();
  test.onload=()=>{
   if(id!==count||!showing)return;
-  rendered.src=path;rendered.hidden=false;
-  message.textContent=file?"High-resolution finished reference.":"Concept thumbnail: the uploaded image is low resolution and may already be cropped at the edges.";
+  rendered.src=path;rendered.hidden=false;rendered.style.width=file?"min(100%,800px)":"253px";
+  message.textContent=file?"Larger finished reference below the original approved template.":"The supplied thumbnail is already cropped. It is shown only at its native size; use the full approved template above for page structure. A complete finished reference is not available for this option yet.";
  };
  test.onerror=()=>{
   if(id!==count||!showing)return;
