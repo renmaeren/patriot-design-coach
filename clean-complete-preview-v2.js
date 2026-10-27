@@ -13,16 +13,17 @@ frame.append(picture,note);image.after(frame);
 let ticket=0;
 function selected(){return (sections[section.value]||"01")+"-"+("abcde"[Number(choice.value)||0]||"a")}
 function view(kind){
- const n=++ticket,key=selected(),file=completed[key],isAfter=kind==="after",hasImage=isAfter&&!!file;
+ const n=++ticket,key=selected(),file=completed[key],isAfter=kind==="after",modelCode=key.slice(0,2),modelIndex="abcde".indexOf(key.slice(-1)),fallback=window.PatriotReferenceModels&&window.PatriotReferenceModels.model&&modelCode>="03",hasImage=isAfter&&(!!file||!!fallback);
  a.classList.toggle("navy",!isAfter);b.classList.toggle("navy",isAfter);
  image.hidden=hasImage;image.style.display=hasImage?"none":"";
  frame.hidden=!hasImage;
- if(title)title.textContent=!isAfter?"BEFORE · APPROVED TEMPLATE":hasImage?"AFTER · FINISHED EXAMPLE":"AFTER · FINISHED EXAMPLE NOT YET AVAILABLE";
- if(intro)intro.textContent=!isAfter?"Follow this official layout in Memento.":hasImage?"A complete finished design example for inspiration.":"This option does not have a complete finished example yet. The official layout remains visible.";
+ if(title)title.textContent=!isAfter?"BEFORE · APPROVED TEMPLATE":file?"AFTER · FINISHED EXAMPLE":fallback?"AFTER · COMPLETE DESIGN MODEL":"AFTER · REFERENCE UNAVAILABLE";
+ if(intro)intro.textContent=!isAfter?"Follow this official layout in Memento.":file?"A complete finished design example for inspiration.":fallback?"A complete, uncropped composition guide with labeled photo and story placements.":"The official template remains visible.";
  if(details)details.textContent=isAfter?"Use verified names, captions, quotations and real photographs in your own spread.":"";
- if(caption)caption.textContent=hasImage?"Finished example · illustrative content, not verified reporting.":isAfter?"Official template · complete finished example pending.":"Official approved template.";
+ if(caption)caption.textContent=hasImage?(file?"Finished example · illustrative content, not verified reporting.":"Complete design model · placeholder imagery, not a finished photographic spread."):isAfter?"Official template visible.":"Official approved template.";
  if(!hasImage)return;
- picture.hidden=true;note.textContent="Loading finished example…";
+ picture.hidden=true;note.textContent="Loading reference…";
+ if(!file&&fallback){picture.src=window.PatriotReferenceModels.model(modelCode,modelIndex);picture.hidden=false;note.textContent="Complete, uncropped design model. Illustrative photo boxes and text are placeholders; follow the official template in Before.";return;}
  const url=file.match(/^0[12]-/) ? "./"+file : "./field-guide/finished/"+file;
  const probe=new Image();probe.onload=()=>{if(ticket!==n)return;picture.src=url;picture.hidden=false;note.textContent="Finished reference; keep all required content in the approved structure."};
  probe.onerror=()=>{if(ticket!==n)return;image.hidden=false;image.style.display="";frame.hidden=true;if(intro)intro.textContent="The finished example is unavailable; the approved layout is shown."};
