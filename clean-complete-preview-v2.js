@@ -23,7 +23,7 @@ function view(kind){
  if(caption)caption.textContent=hasImage?"Finished example · illustrative content, not verified reporting.":isAfter?"Official template · complete finished example pending.":"Official approved template.";
  if(!hasImage)return;
  picture.hidden=true;note.textContent="Loading finished example…";
- const url=file.match(/^0[12]-/)? "./field-guide/complete/"+file : "./field-guide/finished/"+file;
+ const url=file.match(/^0[12]-/) ? "./"+file : "./field-guide/finished/"+file;
  const probe=new Image();probe.onload=()=>{if(ticket!==n)return;picture.src=url;picture.hidden=false;note.textContent="Finished reference; keep all required content in the approved structure."};
  probe.onerror=()=>{if(ticket!==n)return;image.hidden=false;image.style.display="";frame.hidden=true;if(intro)intro.textContent="The finished example is unavailable; the approved layout is shown."};
  probe.src=url;
