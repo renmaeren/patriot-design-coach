@@ -13,7 +13,7 @@ frame.append(picture,note);image.after(frame);
 let ticket=0;
 function selected(){return (sections[section.value]||"01")+"-"+("abcde"[Number(choice.value)||0]||"a")}
 function view(kind){
- const n=++ticket,key=selected(),file=completed[key],isAfter=kind==="after",modelCode=key.slice(0,2),modelIndex="abcde".indexOf(key.slice(-1)),fallback=window.PatriotReferenceModels&&window.PatriotReferenceModels.model&&modelCode>="03",hasImage=isAfter&&(!!file||!!fallback);
+ const n=++ticket,key=selected(),file=completed[key],isAfter=kind==="after",modelCode=key.slice(0,2),modelIndex="abcde".indexOf(key.slice(-1)),fallback=false,hasImage=isAfter&&(!!file||!!fallback);
  a.classList.toggle("navy",!isAfter);b.classList.toggle("navy",isAfter);
  image.hidden=hasImage;image.style.display=hasImage?"none":"";
  frame.hidden=!hasImage;
