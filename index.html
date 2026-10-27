@@ -40,8 +40,7 @@ for(const [key,labels] of Object.entries(names)){if(!Array.isArray(data.images[k
 const json=JSON.stringify(data).replace(/</g,'\\u003c');html=html.slice(0,a+start.length)+json+html.slice(b);
 html=html.replace('</body>','<script src="./planning-bridge.js" defer></scr'+'ipt></body>');
 html=html.replace('</body>','<script src="./guided-wizard.js?v=1" defer></scr'+'ipt></body>');
-html=html.replace('</body>','<script src="./complete-models.js?v=studentready1" defer></scr'+'ipt></body>');
-html=html.replace('</body>','<script src="./clean-complete-preview-v2.js?v=studentready1" defer></scr'+'ipt></body>');
+html=html.replace('</body>','<script src="./clean-complete-preview-v2.js?v=actual-photos-only2" defer></scr'+'ipt></body>');
 html=html.replace('</body>','<nav style="position:fixed;bottom:14px;right:14px;z-index:9999;display:flex;gap:8px;flex-wrap:wrap"><a href="./" style="background:#172b43;color:white;padding:13px;border-radius:5px;font:bold 14px Arial;text-decoration:none">⌂ Home</a><a href="?view=review" style="background:#792f3b;color:white;padding:13px;border-radius:5px;font:bold 14px Arial;text-decoration:none">Review a Spread →</a></nav></body>');
 }else{
 html=html.replace('</body>','<script src="./guided-wizard.js?v=1" defer></scr'+'ipt></body>');
