@@ -18,7 +18,7 @@ main{max-width:1050px;margin:34px auto;padding:0 20px}h2{font-size:28px}p{line-h
 <div class="choices">
 <a class="choice" href="?view=learn"><span aria-hidden="true">◈ &nbsp; TEMPLATE FIELD GUIDE</span><strong>I'm Starting a Spread</strong><span>See approved templates and examples.</span><p><b>Open templates →</b></p></a>
 <a class="choice" href="?view=review"><span aria-hidden="true">✓ &nbsp; REVISION WORKSHOP</span><strong>I'm Reviewing a Spread</strong><span>Check your spread, revise it, and create your final report.</span><p><b>Begin review →</b></p></a>
-</div><div class="mini"><b>Returning to a spread?</b> Choose <b>I’m Reviewing a Spread</b> and keep using the same Gemini conversation.</div></main>
+</div><div class="mini"><b>Returning to a spread?</b> Choose <b>I’m Reviewing a Spread</b>. Bring your saved Google Doc AI Review Log and latest revised page; reattach them in Gemini even if you begin a new chat.</div></main>
 <script>
 (async()=>{
 const mode=new URLSearchParams(location.search).get('view');
@@ -27,7 +27,7 @@ const page=mode==='learn'?'coach-core.html':'ai-review.html';
 const main=document.querySelector('main');
 main.innerHTML='<h2>Opening '+(mode==='learn'?'template field guide':'revision workshop')+'…</h2>';
 try{
-const response=await fetch('./'+page+'?v=20261026c',{cache:'no-store'});
+const response=await fetch('./'+page+'?v=20261029-review-plan',{cache:'no-store'});
 if(!response.ok)throw Error('Unable to load '+page+': '+response.status);
 let html=await response.text();
 if(mode==='learn'){
