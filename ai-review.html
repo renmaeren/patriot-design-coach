@@ -317,7 +317,8 @@ let completed=[false,false,false,false];
 function render(){
 let i=Number(get("wave-select").value),w=waves[i];
 get("wave-tag").textContent="WAVE "+(i+1)+" OF 4";get("wave-title").textContent=w.name;get("wave-goal").textContent=["Check the template, required content, and placement.","Check photos, typography, graphics, and visual balance.","Check stories, captions, headlines, and grammar.","Compare your original and final spreads."][i];get("wave-files").textContent=i===3?"PDF: original + latest spread + template.":"PDF: latest spread + template.";
-get("previous-log-status").innerHTML = get("previous-log").files.length ? "Selected: <strong>"+get("previous-log").files[0].name.replace(/[&<>]/g,"")+"</strong>. You must also attach it inside Gemini." : "This selects your log for reference only. <strong>You must attach the log AGAIN inside school Gemini.</strong> The Coach does not transmit files.";\nget("wave-prompt").value=wavePrompt(i);
+get("previous-log-status").innerHTML = get("previous-log").files.length ? "Selected: <strong>"+get("previous-log").files[0].name.replace(/[&<>]/g,"")+"</strong>. You must also attach it inside Gemini." : "This selects your log for reference only. <strong>You must attach the log AGAIN inside school Gemini.</strong> The Coach does not transmit files.";
+get("wave-prompt").value=wavePrompt(i);
 get("wave-revised").checked=completed[i];
 get("wave-next").textContent=i===3?"Go to Production Report ↓":"Continue to Next Wave →";
 get("wave-next-status").textContent=i===3?"Then create your final report.":"Revise and recheck before continuing.";
