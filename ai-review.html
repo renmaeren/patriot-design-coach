@@ -14,7 +14,7 @@
 <section class="card" id="review-waves" style="border-top:6px solid #792f3b">
 <h2>3 · Review with Gemini</h2>
 
-<p class="sub">Use the same Gemini chat for all four review waves. Revise in Memento between waves.</p>
+<p class="sub">Use the same Gemini chat when available. Between waves, save the full feedback in your Google Doc, revise in Canva or Memento, record your corrections, and reattach the log and updated page in Gemini. Complete all four waves for each assigned page separately.</p>
 <div class="grid" style="margin-top:16px">
 <div><label for="wave-select">Review wave</label><select id="wave-select">
 <option value="0">Wave 1 — Organization &amp; Layout</option>
@@ -27,6 +27,18 @@
 <div style="margin:20px 0;background:#f1e9dc;padding:17px;border-left:4px solid #792f3b"><div class="tag" id="wave-tag">WAVE 1 OF 4</div><h3 id="wave-title">Organization &amp; Layout</h3><p id="wave-goal"></p><p id="wave-files" class="sub"></p></div>
 <details style="margin:14px 0"><summary style="cursor:pointer;font:700 14px Arial,sans-serif">View Gemini instructions (optional)</summary><label for="wave-prompt">Gemini instructions</label><textarea id="wave-prompt" readonly style="min-height:230px"></textarea></details>
 
+<div class="card" id="review-history" style="background:#f8f1e6;border-left:5px solid #792f3b">
+<h3>Previous Wave Evidence · Keep Gemini Informed</h3>
+<p class="sub"><strong>Your Google Doc is the permanent review log.</strong> After EVERY wave, copy all Gemini feedback into the Doc <strong>before</strong> making edits. Then revise in Canva or Memento and write down what you actually changed. A new Chromebook session will not preserve this site's temporary working plan.</p>
+<label for="previous-log">Attach previous review log (Waves 2–4)</label>
+<input id="previous-log" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+<p class="sub" id="previous-log-status">This selects your log for your reference only. <strong>You must attach the log AGAIN inside school Gemini.</strong> The Design Coach does not transmit files to Gemini.</p>
+<div class="grid">
+<div><label for="previous-feedback">Previous feedback summary (optional if attaching full log)</label><textarea id="previous-feedback" rows="4" placeholder="Paste important earlier findings, including anything still unresolved."></textarea></div>
+<div><label for="corrections-made">Corrections actually made since your last wave</label><textarea id="corrections-made" rows="4" placeholder="Example: Moved entire headline off the gutter; replaced generic clip art with verified poll results. Unresolved: two captions need name verification."></textarea></div>
+</div>
+<p class="sub"><strong>Each new wave:</strong> upload your latest revised page above, select the wave, attach the official template and your Google Doc in Gemini, then paste the copied instructions. Gemini must check earlier issues against what is visibly changed—never assume a claimed fix is complete.</p>
+</div>
 <div id="wave-original-wrap" hidden><label for="original-upload">Wave 4 only — original spread (before revisions)</label><input id="original-upload" type="file" accept="image/png,image/jpeg,image/webp,application/pdf"><p class="sub">Needed for the before-and-after check.</p></div>
 <button class="btn" type="button" id="download-pdf">1 · Download Review PDF</button>
 <p class="status" id="pdf-status" role="status"></p>
@@ -36,28 +48,28 @@
 
 <h3>Recheck</h3>
 <button class="btn ghost" id="wave-recheck" type="button">Copy Recheck Prompt</button><p id="wave-recheck-status" class="status" role="status"></p>
-<div style="border-top:1px solid #cdbfa9;padding-top:14px;margin-top:12px"><label class="inlinecheck"><input id="wave-revised" type="checkbox"><span>I revised in Memento and asked Gemini to recheck this wave.</span></label><button class="btn alt" id="wave-next" type="button">Continue to Next Wave →</button><p class="sub" id="wave-next-status">Complete Wave 1 and its recheck before continuing. Any unresolved items must still appear in your final report.</p></div>
+<div style="border-top:1px solid #cdbfa9;padding-top:14px;margin-top:12px"><label class="inlinecheck"><input id="wave-revised" type="checkbox"><span>I revised in Canva or Memento and asked Gemini to recheck this wave.</span></label><button class="btn alt" id="wave-next" type="button">Continue to Next Wave →</button><p class="sub" id="wave-next-status">Complete Wave 1 and its recheck before continuing. Any unresolved items must still appear in your final report.</p></div>
 </section><section class="card" hidden><h2>03 · Review your spread with school Gemini</h2><p class="note"><strong>Three steps:</strong> Copy the prepared critique instructions below, open Gemini in a new tab, then attach <strong>both files</strong>: (1) your Memento spread and (2) the official template from Step 2. Google Gemini cannot automatically see files you uploaded to this Design Coach.</p><p class="sub">These instructions update automatically for your selected template. Check that both the student spread and the official template are attached in Gemini before submitting the request. Gemini cannot verify unseen or illegible details.</p><label for="prompt">Prepared instructions for Gemini</label><textarea id="prompt" readonly></textarea><button class="btn" id="copy">1 · Copy Review Instructions</button><a class="btn alt" href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">Open Gemini ↗</a><p id="copy-status" class="status" role="status"></p><div class="note"><strong>In Gemini:</strong> Paste the copied instructions, use the attachment/paperclip control to upload your spread and the saved official reference image, then send. Gemini should report every visible issue in three waves (Layout, Design, Text/Grammar), ranked MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Fix required issues before polishing. Never treat Gemini feedback as advisor approval.</div></section>
-<section class="card" hidden><h2>04 · Use Gemini's feedback to revise your spread</h2><p><strong>Do not stop when Gemini answers.</strong> The goal is to make corrections in Memento, not just receive a review.</p>
+<section class="card" hidden><h2>04 · Use Gemini's feedback to revise your spread</h2><p><strong>Do not stop when Gemini answers.</strong> The goal is to make corrections in Canva or Memento, not just receive a review.</p>
 <ol style="line-height:1.65;padding-left:25px">
 <li><strong>Read the entire Gemini response.</strong> It should give you THREE waves: <b>1. Layout, 2. Design, 3. Text/Grammar.</b> If a wave is missing, ask Gemini: <em>“Please finish the missing review wave and list every issue you can actually see.”</em></li>
-<li><strong>Start with Wave 1 — Layout.</strong> Find the section labeled <b>MUST DO</b>. Open your spread in Memento and fix those problems first. Then work through <b>NEED TO DO NEXT</b>. Only consider <b>OPTIONAL POLISH</b> after the required work.</li>
-<li><strong>Continue with Wave 2 — Design</strong> in the same order: MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Make the changes in Memento—not just in the Gemini conversation.</li>
+<li><strong>Start with Wave 1 — Layout.</strong> Find the section labeled <b>MUST DO</b>. Open your spread in Canva or Memento and fix those problems first. Then work through <b>NEED TO DO NEXT</b>. Only consider <b>OPTIONAL POLISH</b> after the required work.</li>
+<li><strong>Continue with Wave 2 — Design</strong> in the same order: MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Make the changes in Canva or Memento—not just in the Gemini conversation.</li>
 <li><strong>Finish with Wave 3 — Text/Grammar.</strong> Correct readable errors. Independently verify names, quotes, dates, statistics, captions, rosters, and any text Gemini could not clearly read.</li>
-<li><strong>Mark corrections in Gemini's checklist.</strong> Copy Gemini's response into a Google Doc or your assignment submission, then change each unchecked box <code>[ ]</code> to <code>[x]</code> only <em>after</em> you have made that correction in Memento. Do not mark unchecked items complete merely to finish.</li>
+<li><strong>Mark corrections in Gemini's checklist.</strong> Copy Gemini's response into a Google Doc or your assignment submission, then change each unchecked box <code>[ ]</code> to <code>[x]</code> only <em>after</em> you have made that correction in Canva or Memento. Do not mark unchecked items complete merely to finish.</li>
 <li><strong>Recheck the finished spread.</strong> Export the revised page(s), attach them in the SAME Gemini conversation with the official template, and ask: <em>“Recheck my revised spread against your previous findings. Which MUST DO and NEED TO DO NEXT issues remain? List any new problems you can see.”</em></li>
 <li><strong>Submit for human review.</strong> Follow your editor's required review and approval process. Gemini does not approve pages, verify reporting, or replace an adult reviewer.</li>
 </ol>
 <div class="note"><strong>Priority key:</strong> <b>MUST DO</b> = incorrect template use, missing required elements, illegible text, or other problems blocking approval. <b>NEED TO DO NEXT</b> = important quality improvements. <b>OPTIONAL POLISH</b> = small, nonessential Field Guide enhancements. An item can appear in any of the three review waves.</div>
 <p class="sub">Keep Gemini's response as your revision checklist; you do not have to retype every finding into the manual Spread Inspection Studio.</p>
 <button class="btn ghost" id="copy-recheck" type="button">Copy follow-up recheck instructions</button><p id="recheck-status" class="status" role="status"></p></section><section class="card" hidden id="recheck-revisions" style="border-top:5px solid #792f3b"><h2>05 · Recheck My Revised Spread</h2>
-<p><strong>Already received Gemini feedback and made corrections in Memento?</strong> Come back here to start a second review. You do not need to redo the whole guided setup.</p>
+<p><strong>Already received Gemini feedback and made corrections in Canva or Memento?</strong> Come back here to start a second review. You do not need to redo the whole guided setup.</p>
 <ol style="line-height:1.7;padding-left:25px">
 <li>Export or screenshot your <strong>revised</strong> spread from Memento. Keep your original Gemini conversation open or find it in your Gemini history.</li>
 <li>Click <strong>Copy Recheck Instructions</strong> below.</li>
 <li>Click <strong>Return to Gemini</strong> and open the <em>same conversation</em> that contains the first review. A new conversation will not automatically remember the previous feedback.</li>
 <li>Paste the recheck instructions, and attach your <strong>revised spread</strong> and the <strong>same official template</strong>. If you use a new conversation, also attach or paste your first feedback report.</li>
-<li>Review which findings Gemini marks <strong>RESOLVED</strong>, <strong>STILL NEEDS WORK</strong>, or <strong>CANNOT VERIFY</strong>. Correct remaining MUST DO items in Memento, then repeat if necessary.</li>
+<li>Review which findings Gemini marks <strong>RESOLVED</strong>, <strong>STILL NEEDS WORK</strong>, or <strong>CANNOT VERIFY</strong>. Correct remaining MUST DO items in Canva or Memento, then repeat if necessary.</li>
 <li>Submit the revised spread through your editor's normal review process. <strong>Only a human reviewer can approve it.</strong></li>
 </ol>
 <div class="note"><strong>What gets checked?</strong> Gemini compares the revised spread against the assigned template and the previous review. It should revisit every original correction and identify newly visible problems, not just give three more suggestions.</div>
@@ -119,14 +131,14 @@ For EACH finding:
 - Begin with an unchecked box [ ] and a short action title.
 - WHERE: state the exact page/column/photo/text region.
 - PROBLEM: describe what you can actually observe; do not invent unseen text.
-- FIX IN MEMENTO: give 1–3 concrete instructions the student can carry out without abandoning their assigned template.
+- FIX IN CANVA OR MEMENTO: give 1–3 concrete instructions the student can carry out without abandoning their assigned template.
 - WHY: one sentence explaining why the change matters.
 If no issues are evident in a particular priority group, say “No clearly visible findings” instead of inventing problems. Identify as many genuine findings as the attachments support; do not stop at three.
 
 4. FACT CHECK / HUMAN REVIEW: bullet every unreadable or unverified item (students' names, quotes, rosters, statistics, dates, captions, photo permissions, sponsor/coach, and content requiring adult verification). Never pretend an image proves a fact is accurate.
 5. MEANINGFUL GRAPHIC IDEAS: when appropriate, suggest up to two informational graphics that use real data the staffer must gather. Do not prescribe fabricated numbers, fake polls, or generic clip art.
 6. REVISION ORDER: Briefly remind the student: complete Wave 1 Layout, then Wave 2 Design, then Wave 3 Text/Grammar. Within EACH wave, address MUST DO first, NEED TO DO NEXT second, and OPTIONAL POLISH last when appropriate. Do not mark any boxes as completed.
-7. RECHECK INSTRUCTIONS: Tell the student to revise in Memento, upload the revised spread to this same Gemini conversation with the official template, and request a recheck of unresolved issues.
+7. RECHECK INSTRUCTIONS: Tell the student to revise in Canva or Memento, upload the revised spread to this same Gemini conversation with the official template, and request a recheck of unresolved issues.
 
 IMPORTANT: Do not assert that any corrections were made. You cannot edit the student's Memento spread. Your response is guidance, not final advisor approval.
 Be direct, useful, and encouraging; never declare the spread approved or complete.`;
@@ -162,7 +174,7 @@ async function load(){
  }catch(e){$("reference-status").textContent="Could not load official template references: "+e.message;refreshTemplate();}
 }
 document.getElementById("copy-recheck-return").addEventListener("click",async()=>{
- const prompt="I have revised my yearbook spread in Memento. I have attached the REVISED spread and the SAME official template. Use your previous review from this conversation. Recheck ALL original findings, across Wave 1 Layout, Wave 2 Design, and Wave 3 Text/Grammar. For EACH earlier finding report RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY, with precise visual evidence and the next concrete fix. Organize unresolved and newly noticed findings within each wave by MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Do not limit findings to three. Do not invent unreadable names or text. End with a concise list of remaining MUST DO changes and human verification requirements. Do not claim you edited or approved my spread.";
+ const prompt="I have revised my yearbook spread in Canva or Memento. I have attached the REVISED spread and the SAME official template. Use your previous review from this conversation. Recheck ALL original findings, across Wave 1 Layout, Wave 2 Design, and Wave 3 Text/Grammar. For EACH earlier finding report RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY, with precise visual evidence and the next concrete fix. Organize unresolved and newly noticed findings within each wave by MUST DO, NEED TO DO NEXT, and OPTIONAL POLISH. Do not limit findings to three. Do not invent unreadable names or text. End with a concise list of remaining MUST DO changes and human verification requirements. Do not claim you edited or approved my spread.";
  try{await navigator.clipboard.writeText(prompt);document.getElementById("return-status").textContent="Recheck instructions copied. Open your existing Gemini conversation and attach the revised spread and official template."}
  catch{document.getElementById("return-status").textContent="Clipboard permission blocked. Use the Copy Follow-Up Recheck Instructions control in Step 4 or copy the prompt manually."}
 });
@@ -204,7 +216,7 @@ const pages=[
 {title:"Save the official template",body:"Use Save Official Template for Gemini beneath the reference image. You need BOTH files on your device: your student's spread AND the official template. They are different attachments.",action:"Save official template"},
 {title:"Copy the review instructions",body:"The Coach has written a specific prompt for your selected section and template. Copy it now. It tells Gemini to check ALL issues across Layout, Design, and Text/Grammar, with MUST DO issues first.",action:"Copy instructions"},
 {title:"Open Gemini and attach BOTH files",body:"A new tab opens with Gemini. Use your SCHOOL Google account. Paste the copied prompt into the message box. Click the attachment or plus control and attach (1) your Memento spread and (2) the official template image you saved. Confirm both attachments are visible before sending.",action:"Open school Gemini ↗"},
-{title:"Read the feedback and revise",body:"Back in Memento, work through MUST DO corrections first, then NEED TO DO NEXT, and only then OPTIONAL POLISH. Check factual claims, names, and quotes yourself. Gemini does not approve a spread; follow your editor's review process.",action:"Finish walkthrough"}
+{title:"Read the feedback and revise",body:"Back in Canva or Memento, work through MUST DO corrections first, then NEED TO DO NEXT, and only then OPTIONAL POLISH. Check factual claims, names, and quotes yourself. Gemini does not approve a spread; follow your editor's review process.",action:"Finish walkthrough"}
 ];
 let step=0,visitedGemini=false,savedReference=false,copied=false;
 const overlay=el("guide-overlay");let previousFocus=null;
@@ -229,7 +241,7 @@ function render(){
  if(step===1&&!el("upload").files.length)el("guide-message").textContent="Choose a spread before moving to the next step.";
  if(step===2&&el("reference-download").hidden)el("guide-message").textContent="Wait until the official template finishes loading.";
 }
-el("copy-recheck").addEventListener("click",async()=>{const message="I revised my spread in Memento. I have attached the REVISED student spread and the SAME official template again. Compare the revised spread with your prior three-wave feedback. For each previous MUST DO and NEED TO DO NEXT item, mark RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY with visual evidence. List any newly visible issues, organized into Layout, Design, Text/Grammar and prioritized MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do not invent details or approve the page.";try{await navigator.clipboard.writeText(message);el("recheck-status").textContent="Recheck instructions copied. Paste into your existing Gemini conversation and attach the revised spread plus template."}catch{el("recheck-status").textContent="Copy unavailable; select and copy the recheck instructions from this page manually."}});
+el("copy-recheck").addEventListener("click",async()=>{const message="I revised my spread in Canva or Memento. I have attached the REVISED student spread and the SAME official template again. Compare the revised spread with your prior three-wave feedback. For each previous MUST DO and NEED TO DO NEXT item, mark RESOLVED, STILL NEEDS WORK, or CANNOT VERIFY with visual evidence. List any newly visible issues, organized into Layout, Design, Text/Grammar and prioritized MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do not invent details or approve the page.";try{await navigator.clipboard.writeText(message);el("recheck-status").textContent="Recheck instructions copied. Paste into your existing Gemini conversation and attach the revised spread plus template."}catch{el("recheck-status").textContent="Copy unavailable; select and copy the recheck instructions from this page manually."}});
 el("start-guide").addEventListener("click",open);
 el("upload").addEventListener("change",()=>{if(!overlay.hidden&&step===1)render()});
 el("guide-close").addEventListener("click",close);
@@ -250,7 +262,7 @@ el("guide-action").addEventListener("click",async()=>{
  if(step===2){if(el("reference-download").hidden){el("guide-message").textContent="The official template has not loaded yet.";return}el("reference-download").click();savedReference=true;el("guide-message").textContent="Saved reference requested. Check your Downloads folder.";return}
  if(step===3){try{await navigator.clipboard.writeText(el("prompt").value);copied=true;el("guide-message").textContent="Instructions copied! Paste them into Gemini."}catch{el("guide-message").textContent="Clipboard unavailable. Close this guide and use Copy Review Instructions or Ctrl+C.";return}return}
  if(step===4){window.open("https://gemini.google.com/app","_blank","noopener,noreferrer");visitedGemini=true;el("guide-message").textContent="Gemini opened in a new tab. Paste the instructions and attach BOTH files before sending.";return}
- if(step===5){close();el("copy-status").textContent="Review guide completed. Make your revisions in Memento and follow your editor’s approval process."}
+ if(step===5){close();el("copy-status").textContent="Review guide completed. Make your revisions in Canva or Memento and follow your editor’s approval process."}
 });
 })();
 </script><script>
@@ -266,6 +278,7 @@ function context(){
 const s=get("section").value,t=Number(get("template").value);
 return {s,t,name:get("spread-id").value.trim()||"[spread title missing]",student:get("student-name").value.trim()||"[student name not entered]",round:get("review-round").value||"[round not selected]",topic:get("topic").value.trim()||"[topic not provided]",page:get("page-number").value.trim()||"[pages not provided]"};
 }
+const historyContext=()=>{const f=get("previous-log")?.files?.[0];return "\\nPREVIOUS-WAVE CONTINUITY:\\nPrevious review log selected in the Coach: "+(f?f.name:"NONE — attach the Google Doc or its PDF/DOCX in Gemini")+"\\nEarlier feedback summary: "+(get("previous-feedback")?.value?.trim()||"See attached review log; none pasted")+"\\nStudent-reported corrections since last wave: "+(get("corrections-made")?.value?.trim()||"Not specified")+"\\nGemini: Check earlier findings against the CURRENT spread. Categorize previous items as visibly fixed, unresolved, or unverifiable, then perform only the requested wave. Do not assume the file is attached just because it was selected in the Coach.\\n";};
 function wavePrompt(i){
 const d=context(),w=waves[i];
 return `You are a careful, constructive HIGH SCHOOL YEARBOOK DESIGN COACH for Allen County–Scottsville High School's 2026–27 THE PATRIOT: A FIELD GUIDE.
@@ -287,24 +300,24 @@ FORMAT YOUR RESPONSE:
 2. EVERY CLEARLY VISIBLE ACTIONABLE FINDING, NOT JUST THREE. Group by MUST DO (approval-blocking problems), NEED TO DO NEXT (important changes) and OPTIONAL POLISH (optional refinement). Under each group number every finding and include:
  [ ] WHAT AND WHERE: precise page region or line
  PROBLEM: what you can actually see
- HOW TO FIX IN MEMENTO: specific steps within the official template
+ HOW TO FIX IN CANVA OR MEMENTO: specific steps within the official template
  WHY IT MATTERS: one clear sentence.
 Say “No clearly visible findings” when a group has none. Do not invent issues for a quota.
 3. WHAT IS IMPROVED VS THE PREVIOUS REVIEW: only when earlier files and feedback are present. Distinguish evidence-based resolution from student claims.
 4. HUMAN CHECKS: list unreadable or unverified names, facts, quotes, captions and approvals.
-5. END WITH “REVISE THIS WAVE IN MEMENTO, EXPORT THE UPDATE, THEN ASK ME TO RECHECK THE SAME WAVE.” Do not mark boxes complete or pretend you have edited the file.
+5. END WITH “REVISE THIS WAVE IN CANVA OR MEMENTO, EXPORT THE UPDATE, THEN ASK ME TO RECHECK THE SAME WAVE.” Do not mark boxes complete or pretend you have edited the file.
 
-PLANNING CROSS-CHECK:\n${window.patriotPlanning?.forGemini?.()||"No planning record supplied."}\n\nFocus on THIS wave, not all four at once. Be specific, clear, and student-friendly.`;
+PLANNING CROSS-CHECK:\n${window.patriotPlanning?.forGemini?.()||"No planning record supplied."}\n\nFocus on THIS wave, not all four at once. Be specific, clear, and student-friendly.\n${historyContext()}`;
 }
 function recheckPrompt(i){
 const d=context(),w=waves[i];
-return `RECHECK WAVE ${i+1} — ${w.name.toUpperCase()} for ${d.name}, student-reported visit ${d.round}. I have revised the spread in Memento and attached my LATEST version and the OFFICIAL template. Compare this to your previous WAVE ${i+1} findings in THIS conversation. For EVERY original finding label RESOLVED WITH VISIBLE EVIDENCE, STILL NEEDS WORK, or CANNOT VERIFY; describe exactly what changed or still needs fixing. Identify any new issues in this wave, grouped MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do NOT invent progress, claim to edit the page, or approve it. Finish with all remaining MUST DO and NEED TO DO NEXT items. If prior feedback is missing, explicitly request it.`;
+return `RECHECK WAVE ${i+1} — ${w.name.toUpperCase()} for ${d.name}, student-reported visit ${d.round}. I have revised the spread in Canva or Memento and attached my LATEST version and the OFFICIAL template. Compare this to your previous WAVE ${i+1} findings in THIS conversation. For EVERY original finding label RESOLVED WITH VISIBLE EVIDENCE, STILL NEEDS WORK, or CANNOT VERIFY; describe exactly what changed or still needs fixing. Identify any new issues in this wave, grouped MUST DO, NEED TO DO NEXT, OPTIONAL POLISH. Do NOT invent progress, claim to edit the page, or approve it. Finish with all remaining MUST DO and NEED TO DO NEXT items. If prior feedback is missing, explicitly request it.\n${historyContext()}`;
 }
 let completed=[false,false,false,false];
 function render(){
 let i=Number(get("wave-select").value),w=waves[i];
 get("wave-tag").textContent="WAVE "+(i+1)+" OF 4";get("wave-title").textContent=w.name;get("wave-goal").textContent=["Check the template, required content, and placement.","Check photos, typography, graphics, and visual balance.","Check stories, captions, headlines, and grammar.","Compare your original and final spreads."][i];get("wave-files").textContent=i===3?"PDF: original + latest spread + template.":"PDF: latest spread + template.";
-get("wave-prompt").value=wavePrompt(i);
+get("previous-log-status").innerHTML = get("previous-log").files.length ? "Selected: <strong>"+get("previous-log").files[0].name.replace(/[&<>]/g,"")+"</strong>. You must also attach it inside Gemini." : "This selects your log for reference only. <strong>You must attach the log AGAIN inside school Gemini.</strong> The Coach does not transmit files.";\nget("wave-prompt").value=wavePrompt(i);
 get("wave-revised").checked=completed[i];
 get("wave-next").textContent=i===3?"Go to Production Report ↓":"Continue to Next Wave →";
 get("wave-next-status").textContent=i===3?"Then create your final report.":"Revise and recheck before continuing.";
@@ -401,11 +414,11 @@ get("download-pdf").addEventListener("click",geminiPDF);
 get("wave-select").addEventListener("change",render);
 get("section").addEventListener("change",render);get("template").addEventListener("change",render);
 ["spread-id","student-name","review-round","topic","page-number"].forEach(id=>get(id).addEventListener("input",render));
-get("wave-copy").addEventListener("click",()=>copy(get("wave-prompt").value,"wave-copy-status"));
+["previous-feedback","corrections-made"].forEach(id=>get(id).addEventListener("input",render));\nget("previous-log").addEventListener("change",render);\nget("wave-copy").addEventListener("click",()=>copy(get("wave-prompt").value,"wave-copy-status"));
 get("wave-recheck").addEventListener("click",()=>copy(recheckPrompt(Number(get("wave-select").value)),"wave-recheck-status"));
 get("wave-revised").addEventListener("change",()=>{completed[Number(get("wave-select").value)]=get("wave-revised").checked});
 get("wave-next").addEventListener("click",()=>{const i=Number(get("wave-select").value);
-if(!completed[i]){get("wave-next-status").textContent="First confirm you made revisions in Memento AND asked Gemini to recheck this wave. You can return later; this checkbox is your own declaration.";return}
+if(!completed[i]){get("wave-next-status").textContent="First confirm you made revisions in Canva or Memento AND asked Gemini to recheck this wave. You can return later; this checkbox is your own declaration.";return}
 if(i<3){get("wave-select").value=String(i+1);render();get("review-waves").scrollIntoView({behavior:"smooth",block:"start"})}
 else{get("production-report").scrollIntoView({behavior:"smooth",block:"start"})}
 });
