@@ -9,6 +9,7 @@ const stages=[
 {title:"Export & Next Steps",purpose:"Save your plan and prepare the files for Gemini.",tasks:[["Review the plan","Make sure your decisions and reporting are complete.","textarea,input"],["Save your planning record","Enter the spread title and use Save Plan & Continue to Review.","#patriot-plan-save"],["Continue to review","Move to the review workflow with your saved responses.","a[href*=review],#patriot-plan-save"]]},
 {title:"Spread Review Lab",purpose:"Complete FOUR waves for EACH assigned page. Save feedback after every wave so Gemini can review your corrections later.",tasks:[
 ["Choose your page and template","Select the assigned section/template and enter your page details. A–C are single pages; D–E are double-page spreads.","#section,#template"],
+["Choose your editing program","Select Canva or Memento. Gemini will explain each required correction using the program you choose. Canva is the default; change it if needed.","#page-editor"],
 ["Upload current page","Export the latest version from Canva or Memento, then upload it here. The official template appears beside it.","#upload"],
 ["Choose the wave","Start at Wave 1. Complete Organization & Layout, Visual Design, Writing & Copy Editing, then Final Overall Review. Do all four separately for each assigned page.","#wave-select"],
 ["Bring your previous history","For Waves 2–4, download your Google Doc AI Review Log as PDF/DOCX; select it here. List fixes made and anything still unresolved.","#previous-log,#corrections-made"],
